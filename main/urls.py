@@ -1,16 +1,24 @@
 # optivoraback/urls.py
 from django.contrib import admin
-from django.urls import path, re_path, include
+from django.urls import path, include, re_path
 from django.conf import settings
 from django.conf.urls.static import static
-from rest_framework_swagger.views import get_swagger_view
 from django.http import HttpResponse
 
-# Swagger (rest_framework_swagger) — patterns argumenti shart emas
-schema_view = get_swagger_view(
-    title='Optivora API documentation',
-    url='/api/v1/'  # API bazaviy prefiksi
-)
+# Swagger UI (rest_framework_swagger) – mavjud bo‘lsa ishlaydi, bo‘lmasa fallback beradi
+try:
+    from rest_framework_swagger.views import get_swagger_view
+    schema_view = get_swagger_view(
+        title='Optivora API documentation',
+        url='/api/v1/'   # API bazaviy prefiks
+    )
+except Exception:
+    # Agar paket yo‘q/versiya mos kelmasa ham 404 bo‘lmasin:
+    def schema_view(request):
+        return HttpResponse(
+            "Docs UI uchun 'rest_framework_swagger' kerak. Hozircha bu fallback ishlayapti.",
+            content_type="text/plain"
+        )
 
 def health(request):
     return HttpResponse("OK")
@@ -22,20 +30,20 @@ urlpatterns = [
     # Health-check
     path('health/', health),
 
-    # Swagger docs
-    path('', schema_view),                 # rootda ham ochilsin
-    path('api/v1/docs/', schema_view),     # siz xohlagan yo‘l
+    # Swagger / Docs
+    path('', schema_view, name='root_docs'),             # rootda ham ochiladi
+    path('api/v1/docs/', schema_view, name='swagger'),   # siz so‘ragan URL
 
-    # DRF login/logout UI
+    # DRF auth UI
     re_path(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
-    # Asosiy API marshrutlari
+    # API marshrutlari
     path('api/v1/', include('restapp.urls')),
 ]
 
-# DEBUG=True bo‘lsa, static’ni Django bersin (WhiteNoise bilan ham ishlaydi)
+# DEBUG=True bo‘lsa statikni Django beradi (prod’da WhiteNoise beradi)
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
-# MEDIA fayllar (past trafik uchun mos)
+# Media fayllar (kerak bo‘lsa)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

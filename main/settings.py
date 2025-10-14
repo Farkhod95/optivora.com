@@ -10,7 +10,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     "api.optivora-group.com", "optivora-group.com", "www.optivora-group.com",
-    "localhost", "127.0.0.1"
+    "localhost", "127.0.0.1", "http://dev-zone.uz/", "dev-zone.uz", "www.dev-zone.uz"
 ]
 
 INSTALLED_APPS = [
@@ -53,6 +53,7 @@ MIDDLEWARE = [
 CORS_ORIGIN_ALLOW_ALL = False
 
 CORS_ALLOWED_ORIGINS = [
+    "http://dev-zone.uz/",
     "https://optivora-group.com",
     "https://www.optivora-group.com",
     "https://api.optivora-group.com",

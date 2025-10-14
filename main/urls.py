@@ -15,15 +15,21 @@ def health(request):
 urlpatterns = [
     re_path(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('admin/', admin.site.urls),
-    path('health/', health),            # foydali health-check
+
+    # Sog'liqni tekshirish
+    path('health/', health),
+
+    # Swagger
     path('', schema_view),
     path('api/v1/docs/', schema_view),
+
+    # API
     path('api/v1/', include('restapp.urls')),
 ]
 
-# STATIC faqat DEBUG=True da Django orqali beriladi (WhiteNoise productionda yetarli)
+# STATIC faqat DEBUG=True da Django orqali
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
-# MEDIA’ni vaqtincha Django orqali berib turamiz (past trafik uchun yaroqli)
+# MEDIA (zarurat bo'lsa)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -10,7 +10,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     "api.optivora-group.com", "optivora-group.com", "www.optivora-group.com",
-    "localhost", "127.0.0.1",
+    "localhost", "127.0.0.1", '45.138.159.166',
 ]
 
 INSTALLED_APPS = [
@@ -56,6 +56,7 @@ CORS_ALLOWED_ORIGINS = [
     "https://optivora-group.com",
     "https://www.optivora-group.com",
     "https://api.optivora-group.com",
+    "45.138.159.166",
     "http://localhost:3000",
 ]
 

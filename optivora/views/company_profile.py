@@ -5,21 +5,21 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from directory.filterset import CountrysFilter
-from directory.models import Country
-from directory.serializers import CountrySerializer
+from optivora.filterset import CompanyProfilesFilter
+from optivora.models import CompanyProfile
+from optivora.serializers import CompanyProfileSerializer
 
 from restapp.pagination import ResultsSetPagination
 from restapp.utils.responses import nonContent
 
 
-class CountryFieldInfoView(APIView):
+class CompanyProfileFieldInfoView(APIView):
     permission_classes = [IsAuthenticated,]
 
     def get(self, request):
         field_info = []
 
-        for field in Country._meta.fields:
+        for field in CompanyProfile._meta.fields:
             field_info.append({
                 "field_name": field.name,
                 "verbose_name": str(field.verbose_name),
@@ -32,47 +32,47 @@ class CountryFieldInfoView(APIView):
         return Response(field_info)
 
 
-class CountryView(ListCreateAPIView):
-    serializer_class = CountrySerializer
+class CompanyProfileView(ListCreateAPIView):
+    serializer_class = CompanyProfileSerializer
     pagination_class = ResultsSetPagination
     filter_backends = (filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend)
-    filterset_class = CountrysFilter
+    filterset_class = CompanyProfilesFilter
     search_fields = ('name_uz', 'name_ru', 'code')
     ordering = ['pk']
 
     def get_queryset(self):
-        return Country.objects.all()
+        return CompanyProfile.objects.all()
 
     def post(self, request):
-        serializer = CountrySerializer(data=request.data)
+        serializer = CompanyProfileSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save(created_by=self.request.user)
         return Response(serializer.data, status.HTTP_201_CREATED)
 
 
-class CountryDetailView(RetrieveUpdateDestroyAPIView):
-    serializer_class = CountrySerializer
+class CompanyProfileDetailView(RetrieveUpdateDestroyAPIView):
+    serializer_class = CompanyProfileSerializer
 
     def get_queryset(self):
-        return Country.objects.all()
+        return CompanyProfile.objects.all()
 
     def perform_update(self, serializer):
         serializer.save(updated_by=self.request.user)
 
     def get(self, request, pk):
-        instance = get_object_or_404(Country, id=pk)
-        serializer = CountrySerializer(instance)
+        instance = get_object_or_404(CompanyProfile, id=pk)
+        serializer = CompanyProfileSerializer(instance)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def put(self, request, pk):
-        instance = get_object_or_404(Country, id=pk)
+        instance = get_object_or_404(CompanyProfile, id=pk)
         serializer = self.serializer_class(instance, data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save(updated_by=self.request.user)
         return Response(serializer.data, status.HTTP_202_ACCEPTED)
 
     def delete(self, request, pk):
-        instance = get_object_or_404(Country, id=pk)
+        instance = get_object_or_404(CompanyProfile, id=pk)
         instance.delete()
         return Response(nonContent(), status.HTTP_204_NO_CONTENT)
 

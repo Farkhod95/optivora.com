@@ -38,7 +38,7 @@ class DistrictViewList(ListCreateAPIView):
     pagination_class = ResultsSetPagination
     filter_backends = (filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend)
     filterset_class = DistrictFilter
-    search_fields = ('name_uz', 'name_uz_cyrl', 'name_ru', 'name_kaa', 'code')
+    search_fields = ('name_uz', 'name_ru', 'code')
     ordering = ['pk']
     permission_classes = (AllowAny,)
     http_method_names = ['get']
@@ -52,7 +52,7 @@ class DistrictView(ListCreateAPIView):
     pagination_class = ResultsSetPagination
     filter_backends = (filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend)
     filterset_class = DistrictFilter
-    search_fields = ('name_uz', 'name_uz_cyrl', 'name_ru', 'name_kaa', 'code')
+    search_fields = ('name_uz', 'name_ru', 'code')
     ordering = ['pk']
 
     def get_queryset(self):

@@ -5,14 +5,15 @@ from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework_swagger.views import get_swagger_view
 from restapp.urls import urlpatterns as rest_urlpatterns
-# from optivora.view import index
+from django.http import HttpResponse
 
 api_title = 'Optivora API documentation'
 schema_view = get_swagger_view(title=api_title, patterns=rest_urlpatterns, url='/api/v1/')
-
+def health(request): return HttpResponse("OK")
 urlpatterns = [
     re_path(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('admin/', admin.site.urls),
+    path("health/", health),
     path('', schema_view),
     path('api/v1/docs/', schema_view),
     path('api/v1/', include('restapp.urls')),

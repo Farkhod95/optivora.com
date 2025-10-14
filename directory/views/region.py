@@ -37,7 +37,7 @@ class RegionViewList(ListCreateAPIView):
     serializer_class = RegionListSerializer
     pagination_class = ResultsSetPagination
     filter_backends = (filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend)
-    search_fields = ('name_uz', 'name_uz_cyrl', 'name_ru', 'name_kaa', 'code')
+    search_fields = ('name_uz', 'name_ru', 'code')
     permission_classes = (AllowAny,)
     ordering = ['pk']
     http_method_names = ['get']
@@ -51,7 +51,7 @@ class RegionView(ListCreateAPIView):
     pagination_class = ResultsSetPagination
     filter_backends = (filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend)
     filterset_class = RegionssFilter
-    search_fields = ('name_uz', 'name_uz_cyrl', 'name_ru', 'name_kaa', 'code')
+    search_fields = ('name_uz', 'name_ru', 'code')
     ordering = ['pk']
 
     def get_queryset(self):

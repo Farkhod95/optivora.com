@@ -3,16 +3,18 @@ from datetime import timedelta
 from django.utils.translation import gettext_lazy as _
 from corsheaders.defaults import default_headers
 import environ
+import os, sys
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 env = environ.Env()
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
-SECRET_KEY = env("SECRET_KEY")
+SECRET_KEY = 'django-insecure-12345yourkeyhere54321'
 
-DEBUG = env.bool("DEBUG")
+DEBUG = False
 
-ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["localhost"])
+ALLOWED_HOSTS = ["api.optivora-group.com", "localhost", "127.0.0.1"]
 
 INSTALLED_APPS = [
     'modeltranslation',
@@ -53,9 +55,9 @@ MIDDLEWARE = [
 CORS_ORIGIN_ALLOW_ALL = False
 
 CORS_ALLOWED_ORIGINS = [
-    "http://10.10.20.63:3030",
+    "optivora-group.com",
     "http://localhost:3000",  # agar lokalda ishlayotgan bo‘lsa
-    "http://localhost:5173",  # agar lokalda ishlayotgan bo‘lsa
+    "https:optivora-group.com",  # agar lokalda ishlayotgan bo‘lsa
 ]
 
 

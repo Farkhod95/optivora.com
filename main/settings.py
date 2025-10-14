@@ -99,12 +99,13 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'optivora_db',
-        'USER': 'postgres',
-        'PASSWORD': 'root',
+        'USER': 'optivora_user',
+        'PASSWORD': 'optivora_password',
         'HOST': 'localhost',
         'PORT': '5432',
     }
 }
+
 
 # Password validation
 

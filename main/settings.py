@@ -6,7 +6,7 @@ import environ
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = 'django-insecure-12345yourkeyhere54321'
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     "api.optivora-group.com", "optivora-group.com", "www.optivora-group.com",

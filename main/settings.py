@@ -181,8 +181,8 @@ LANGUAGE_CODE = 'uz'
 
 # Static files (CSS, JavaScript, Images)
 
-STATIC_URL = "/static/"
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATIC_URL =  'static/'
+STATIC_ROOT = "/home/host1836067/api.optivora-group.com/htdocs/www/static/"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 

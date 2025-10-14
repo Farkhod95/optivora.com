@@ -85,36 +85,27 @@ ASGI_APPLICATION = 'main.asgi.application'
 
 ### Local Host uchun
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env("DB_NAME"),
-        'USER': env("DB_USER"),
-        'PASSWORD': env("DB_PASSWORD"),
-        'HOST': env("DB_HOST"),
-        'PORT': env("DB_PORT"),
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': env("DB_NAME"),
+#         'USER': env("DB_USER"),
+#         'PASSWORD': env("DB_PASSWORD"),
+#         'HOST': env("DB_HOST"),
+#         'PORT': env("DB_PORT"),
+#     }
+# }
 
 ### Server uchun
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'host1836067_optivora',
-#         'USER': 'host1836067_optivora',
-#         'PASSWORD': 'optivora123',
-#         'HOST': 'localhost',
-#         'PORT': 3307,
-#         'OPTIONS': {
-#             'charset': 'utf8mb4',
-#             'use_unicode': True,
-#             'init_command': "SET sql_mode='STRICT_TRANS_TABLES', innodb_strict_mode=1",
-#         },
-#         'CONN_MAX_AGE': 60,
-#         'ATOMIC_REQUESTS': True,
-#     }
-# }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        # Loyihaning ildizida db.sqlite3 faylini yaratadi
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
 
 # Password validation
 

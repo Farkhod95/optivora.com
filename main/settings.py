@@ -2,18 +2,23 @@ import os
 from datetime import timedelta
 from django.utils.translation import gettext_lazy as _
 from corsheaders.defaults import default_headers
-import environ
-import os, sys
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+# PRODUKSIYA
 SECRET_KEY = 'django-insecure-12345yourkeyhere54321'
-
 DEBUG = False
 
 ALLOWED_HOSTS = [
     "api.optivora-group.com", "optivora-group.com", "www.optivora-group.com",
     "localhost", "127.0.0.1"
+]
+
+# Django 4+ da HTTPS ostida form yuborish uchun kerak
+CSRF_TRUSTED_ORIGINS = [
+    "https://optivora-group.com",
+    "https://www.optivora-group.com",
+    "https://api.optivora-group.com",
 ]
 
 INSTALLED_APPS = [
@@ -24,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'users.apps.UsersConfig',
     'restapp',
     'rest_framework',
@@ -32,42 +38,42 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',
     'django_filters',
     'corsheaders',
+
     'optivora',
     'directory',
+
     'django_celery_results',
     'django_celery_beat',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # staticni WhiteNoise beradi
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',  # for front
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'restapp.middlewares.middlewares.RequestMiddleware',
-    'django.middleware.locale.LocaleMiddleware',  # for translation
+    'django.middleware.locale.LocaleMiddleware',
 ]
 
 CORS_ORIGIN_ALLOW_ALL = False
-
 CORS_ALLOWED_ORIGINS = [
     "https://optivora-group.com",
     "https://www.optivora-group.com",
     "https://api.optivora-group.com",
-    "http://localhost:3000",  # agar lokalda ishlayotgan bo‘lsa
+    "http://localhost:3000",
 ]
-
 
 ROOT_URLCONF = 'main.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR + '/templates'],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -85,62 +91,32 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "main.wsgi.application"
 
-### Local Host uchun
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': env("DB_NAME"),
-#         'USER': env("DB_USER"),
-#         'PASSWORD': env("DB_PASSWORD"),
-#         'HOST': env("DB_HOST"),
-#         'PORT': env("DB_PORT"),
-#     }
-# }
-
-### Server uchun
-
-
+# --- DB (hozircha sqlite, ishlayveradi). Keyin MySQL/MariaDB'ga o‘tkazamiz.
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        # Loyihaning ildizida db.sqlite3 faylini yaratadi
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
-# Password validation
-
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',},
 ]
 
-# Django REST framework simplejwt
-
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    ),
+    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-        'rest_framework.authentication.SessionAuthentication'
+        'rest_framework.authentication.SessionAuthentication',
     ),
     'UNICODE_JSON': True,
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
     'EXCEPTION_HANDLER': 'restapp.exceptions.custom_exception_handler',
-    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
 }
 
 SIMPLE_JWT = {
@@ -150,11 +126,7 @@ SIMPLE_JWT = {
 }
 
 SWAGGER_SETTINGS = {
-    'SECURITY_DEFINITIONS': {
-        'basic': {
-            'type': 'basic'
-        }
-    },
+    'SECURITY_DEFINITIONS': {'basic': {'type': 'basic'}}
 }
 
 LOGIN_URL = 'rest_framework:login'
@@ -164,38 +136,24 @@ LANGUAGES = (
     ('en', _('Ingliz')),
     ('uz', _('O‘zbek (Lotin)')),
     ('ru', _('Русский')),
-
 )
 
-# Internationalization
-
 TIME_ZONE = 'Asia/Tashkent'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
-
 LANGUAGE_CODE = 'uz'
 
-# Static files (CSS, JavaScript, Images)
-
-STATIC_URL =  'static/'
+# ======= STATIC & MEDIA =======
+# MUHIM: boshida / bo‘lishi shart!
+STATIC_URL = '/static/'
 STATIC_ROOT = "/home/host1836067/api.optivora-group.com/htdocs/www/static/"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-
-AUTH_USER_MODEL = 'users.User'
-
-LOCALE_PATHS = (
-    os.path.join(BASE_DIR, 'locale'),
-)
-
-# media fayllar (upload qilingan rasm, fayl, video)
 MEDIA_URL = '/assets/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-# Default primary key field type
-
+AUTH_USER_MODEL = 'users.User'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale'),)

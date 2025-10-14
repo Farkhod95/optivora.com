@@ -1,0 +1,11 @@
+PassengerEnabled on
+PassengerAppRoot /home/host1836067/api.optivora-group.com/htdocs/www
+PassengerAppType wsgi
+PassengerStartupFile passenger_wsgi.py
+PassengerPython /home/host1836067/api.optivora-group.com/htdocs/www/.venv/bin/python
+
+# Static fayllarni WhiteNoise beradi, lekin media’ni Apache ham to‘g‘ridan-to‘g‘ri bera oladi.
+# Agar xohlasangiz assets/ ni to‘g‘ridan-to‘g‘ri berish uchun:
+RewriteEngine On
+RewriteCond %{REQUEST_URI} ^/assets/
+RewriteRule ^ - [L]

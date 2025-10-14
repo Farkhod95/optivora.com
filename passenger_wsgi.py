@@ -1,9 +1,9 @@
-# passenger_wsgi.py
-import os, sys
+import os
+import sys
 
-PROJECT_ROOT = "/home/host1836067/api.optivora-group.com/htdocs/www"
-if PROJECT_ROOT not in sys.path:
-    sys.path.insert(0, PROJECT_ROOT)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+if BASE_DIR not in sys.path:
+    sys.path.insert(0, BASE_DIR)
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "main.settings")
 

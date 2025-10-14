@@ -14,7 +14,10 @@ SECRET_KEY = 'django-insecure-12345yourkeyhere54321'
 
 DEBUG = False
 
-ALLOWED_HOSTS = ["api.optivora-group.com", "localhost", "127.0.0.1"]
+ALLOWED_HOSTS = [
+    "api.optivora-group.com", "optivora-group.com", "www.optivora-group.com",
+    "localhost", "127.0.0.1"
+]
 
 INSTALLED_APPS = [
     'modeltranslation',
@@ -55,9 +58,10 @@ MIDDLEWARE = [
 CORS_ORIGIN_ALLOW_ALL = False
 
 CORS_ALLOWED_ORIGINS = [
-    "optivora-group.com",
+    "https://optivora-group.com",
+    "https://www.optivora-group.com",
+    "https://api.optivora-group.com",
     "http://localhost:3000",  # agar lokalda ishlayotgan bo‘lsa
-    "https:optivora-group.com",  # agar lokalda ishlayotgan bo‘lsa
 ]
 
 
@@ -183,10 +187,10 @@ LANGUAGE_CODE = 'uz'
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static")
-]
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, "static")
+# ]
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 # WhiteNoise’ga tavsiya etiladigan storage:
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

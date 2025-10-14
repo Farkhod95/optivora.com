@@ -37,3 +37,13 @@
 
     http://localhost:8000/api/v1/
     http://localhost:8000/admin/
+
+#### 8. Server Hostland
+    cd ~/www/optivora.com
+    python3.11 -m venv .venv
+    source .venv/bin/activate
+    python -m pip install --upgrade pip setuptools wheel
+    pip --version   # yangilanganini ko‘rasiz
+    pip install -r requirements.txt
+    python -m django --version   # 4.2.13 chiqishi kerak
+

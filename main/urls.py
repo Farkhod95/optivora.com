@@ -13,7 +13,7 @@ def health(request): return HttpResponse("OK")
 urlpatterns = [
     re_path(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('admin/', admin.site.urls),
-    path("health/", health),
+    # path("health/", health),
     path('', schema_view),
     path('api/v1/docs/', schema_view),
     path('api/v1/', include('restapp.urls')),

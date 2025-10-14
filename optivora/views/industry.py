@@ -5,21 +5,21 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from optivora.filterset import CompanyProfilesFilter
-from optivora.models import CompanyProfile
-from optivora.serializers import CompanyProfileSerializer
+from optivora.filterset import IndustrysFilter
+from optivora.models import Industry
+from optivora.serializers import IndustrySerializer
 
 from restapp.pagination import ResultsSetPagination
 from restapp.utils.responses import nonContent
 
 
-class CompanyProfileFieldInfoView(APIView):
+class IndustryFieldInfoView(APIView):
     permission_classes = [IsAuthenticated,]
 
     def get(self, request):
         field_info = []
 
-        for field in CompanyProfile._meta.fields:
+        for field in Industry._meta.fields:
             field_info.append({
                 "field_name": field.name,
                 "verbose_name": str(field.verbose_name),
@@ -32,47 +32,47 @@ class CompanyProfileFieldInfoView(APIView):
         return Response(field_info)
 
 
-class CompanyProfileView(ListCreateAPIView):
-    serializer_class = CompanyProfileSerializer
+class IndustryView(ListCreateAPIView):
+    serializer_class = IndustrySerializer
     pagination_class = ResultsSetPagination
     filter_backends = (filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend)
-    filterset_class = CompanyProfilesFilter
-    search_fields = ('name', 'phone')
+    filterset_class = IndustrysFilter
+    search_fields = ('name', 'slug', 'short_description')
     ordering = ['pk']
 
     def get_queryset(self):
-        return CompanyProfile.objects.all()
+        return Industry.objects.all()
 
     def post(self, request):
-        serializer = CompanyProfileSerializer(data=request.data)
+        serializer = IndustrySerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save(created_by=self.request.user)
         return Response(serializer.data, status.HTTP_201_CREATED)
 
 
-class CompanyProfileDetailView(RetrieveUpdateDestroyAPIView):
-    serializer_class = CompanyProfileSerializer
+class IndustryDetailView(RetrieveUpdateDestroyAPIView):
+    serializer_class = IndustrySerializer
 
     def get_queryset(self):
-        return CompanyProfile.objects.all()
+        return Industry.objects.all()
 
     def perform_update(self, serializer):
         serializer.save(updated_by=self.request.user)
 
     def get(self, request, pk):
-        instance = get_object_or_404(CompanyProfile, id=pk)
-        serializer = CompanyProfileSerializer(instance)
+        instance = get_object_or_404(Industry, id=pk)
+        serializer = IndustrySerializer(instance)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def put(self, request, pk):
-        instance = get_object_or_404(CompanyProfile, id=pk)
+        instance = get_object_or_404(Industry, id=pk)
         serializer = self.serializer_class(instance, data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save(updated_by=self.request.user)
         return Response(serializer.data, status.HTTP_202_ACCEPTED)
 
     def delete(self, request, pk):
-        instance = get_object_or_404(CompanyProfile, id=pk)
+        instance = get_object_or_404(Industry, id=pk)
         instance.delete()
         return Response(nonContent(), status.HTTP_204_NO_CONTENT)
 

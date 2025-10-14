@@ -56,7 +56,6 @@ CORS_ALLOWED_ORIGINS = [
     "https://optivora-group.com",
     "https://www.optivora-group.com",
     "https://api.optivora-group.com",
-    "45.138.159.166",
     "http://localhost:3000",
 ]
 

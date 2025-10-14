@@ -1,35 +1,41 @@
+# optivoraback/urls.py
 from django.contrib import admin
 from django.urls import path, re_path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework_swagger.views import get_swagger_view
-from restapp.urls import urlpatterns as rest_urlpatterns
 from django.http import HttpResponse
 
-api_title = 'Optivora API documentation'
-schema_view = get_swagger_view(title=api_title, patterns=rest_urlpatterns, url='/api/v1/')
+# Swagger (rest_framework_swagger) — patterns argumenti shart emas
+schema_view = get_swagger_view(
+    title='Optivora API documentation',
+    url='/api/v1/'  # API bazaviy prefiksi
+)
 
 def health(request):
     return HttpResponse("OK")
 
 urlpatterns = [
-    re_path(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    # Admin
     path('admin/', admin.site.urls),
 
-    # Sog'liqni tekshirish
+    # Health-check
     path('health/', health),
 
-    # Swagger
-    path('', schema_view),
-    path('api/v1/docs/', schema_view),
+    # Swagger docs
+    path('', schema_view),                 # rootda ham ochilsin
+    path('api/v1/docs/', schema_view),     # siz xohlagan yo‘l
 
-    # API
+    # DRF login/logout UI
+    re_path(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+
+    # Asosiy API marshrutlari
     path('api/v1/', include('restapp.urls')),
 ]
 
-# STATIC faqat DEBUG=True da Django orqali
+# DEBUG=True bo‘lsa, static’ni Django bersin (WhiteNoise bilan ham ishlaydi)
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
-# MEDIA (zarurat bo'lsa)
+# MEDIA fayllar (past trafik uchun mos)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,9 +1,12 @@
-import os, sys
+# passenger_wsgi.py
+import os
+import sys
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 if BASE_DIR not in sys.path:
     sys.path.insert(0, BASE_DIR)
 
-# Agar aktiv loyiha 'optivoraback' bo'lsa:
+# Aynan shu settings’dan ishlasin:
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "optivoraback.settings")
 
 from django.core.wsgi import get_wsgi_application

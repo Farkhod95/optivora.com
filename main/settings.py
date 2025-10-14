@@ -1,11 +1,10 @@
+# optivoraback/settings.py
 import os
 from datetime import timedelta
 from django.utils.translation import gettext_lazy as _
-from corsheaders.defaults import default_headers
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# PRODUKSIYA
 SECRET_KEY = 'django-insecure-12345yourkeyhere54321'
 DEBUG = False
 
@@ -14,7 +13,6 @@ ALLOWED_HOSTS = [
     "localhost", "127.0.0.1"
 ]
 
-# Django 4+ da HTTPS ostida form yuborish uchun kerak
 CSRF_TRUSTED_ORIGINS = [
     "https://optivora-group.com",
     "https://www.optivora-group.com",
@@ -48,7 +46,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # staticni WhiteNoise beradi
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # static ni prod’da beradi
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -68,30 +66,10 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
 ]
 
-ROOT_URLCONF = 'main.urls'
+ROOT_URLCONF = 'optivoraback.urls'
+WSGI_APPLICATION = 'optivoraback.wsgi.application'
 
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-            'libraries': {
-                'staticfiles': 'django.templatetags.static',
-            }
-        },
-    },
-]
-
-WSGI_APPLICATION = "main.wsgi.application"
-
-# --- DB (hozircha sqlite, ishlayveradi). Keyin MySQL/MariaDB'ga o‘tkazamiz.
+# Hozircha sqlite (ishlaydi). Keyin MySQL/MariaDB ga o‘tasiz.
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -144,9 +122,8 @@ USE_L10N = True
 USE_TZ = True
 LANGUAGE_CODE = 'uz'
 
-# ======= STATIC & MEDIA =======
-# MUHIM: boshida / bo‘lishi shart!
-STATIC_URL = '/static/'
+# === MUHIM: STATIC & MEDIA ===
+STATIC_URL = '/static/'  # boshida slash BO‘LSIN!
 STATIC_ROOT = "/home/host1836067/api.optivora-group.com/htdocs/www/static/"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 

@@ -13,16 +13,6 @@ ALLOWED_HOSTS = [
     "localhost", "127.0.0.1",
 ]
 
-CSRF_TRUSTED_ORIGINS = [
-    "https://api.optivora-group.com",
-    "https://optivora-group.com",
-    "https://www.optivora-group.com",
-    "http://localhost:3000",
-]
-USE_X_FORWARDED_HOST = True
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-
 INSTALLED_APPS = [
     'modeltranslation',
     'django.contrib.admin',
@@ -69,7 +59,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
 ]
 
-CORS_ALLOW_CREDENTIALS = True
+
 ROOT_URLCONF = 'main.urls'
 
 TEMPLATES = [
@@ -181,7 +171,7 @@ STATIC_URL = '/static/'
 # STATICFILES_DIRS = [
 #     os.path.join(BASE_DIR, "static")
 # ]
-STATIC_ROOT = os.path.join(BASE_DIR, 'public', 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 # WhiteNoise’ga tavsiya etiladigan storage:
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
@@ -194,13 +184,8 @@ LOCALE_PATHS = (
 
 # media fayllar (upload qilingan rasm, fayl, video)
 MEDIA_URL = '/assets/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'public', 'assets')
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # Default primary key field type
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-SECURE_HSTS_SECONDS = 0  # agar to‘liq HTTPS bo‘lsa, 31536000 qilib qo‘yishingiz mumkin
-SECURE_HSTS_INCLUDE_SUBDOMAINS = False
-SECURE_HSTS_PRELOAD = False
-SECURE_SSL_REDIRECT = False  # Agar domeningiz faqat HTTPS bo‘lsa, True qiling
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

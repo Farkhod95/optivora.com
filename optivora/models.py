@@ -35,7 +35,6 @@ class Industry(BaseModel):
     class Meta:
         verbose_name = _('Sektor')
         verbose_name_plural = _('Sektorlar')
-        ordering = ['order_index', 'name']
 
     def __str__(self):
         return self.name
@@ -51,7 +50,6 @@ class EquipmentCategory(BaseModel):
     class Meta:
         verbose_name = _('Uskuna kategoriyasi')
         verbose_name_plural = _('Uskuna kategoriyalari')
-        ordering = ['order_index', 'name']
 
     def __str__(self):
         return self.name
@@ -71,7 +69,6 @@ class Service(BaseModel):
     class Meta:
         verbose_name = _('Xizmat')
         verbose_name_plural = _('Xizmatlar')
-        ordering = ['order_index', 'name']
 
     def __str__(self):
         return self.name
@@ -98,7 +95,6 @@ class Partner(BaseModel):
     class Meta:
         verbose_name = _('Hamkor')
         verbose_name_plural = _('Hamkorlar')
-        ordering = ['category', 'order_index', 'name']
 
     def __str__(self):
         return self.name
@@ -123,8 +119,6 @@ class Project(BaseModel):
     class Meta:
         verbose_name = _('Loyiha')
         verbose_name_plural = _('Loyihalar')
-        ordering = ['-year', 'order_index', 'title']
-        indexes = [models.Index(fields=['year'])]  # Yil bo‘yicha tezkor qidiruv
 
     def __str__(self):
         return f"{self.title} ({self.year})"
@@ -138,7 +132,6 @@ class ProjectDeliverable(BaseModel):
     class Meta:
         verbose_name = _('Loyiha deliverabli')
         verbose_name_plural = _('Loyiha deliverabllari')
-        ordering = ['id']
 
     def __str__(self):
         return self.name
@@ -154,7 +147,6 @@ class ProjectImage(BaseModel):
     class Meta:
         verbose_name = _('Loyiha rasmi')
         verbose_name_plural = _('Loyiha rasmlari')
-        ordering = ['order_index', 'id']
 
     def __str__(self):
         return f"{self.project.title} - {self.id}"
@@ -169,7 +161,6 @@ class StatItem(BaseModel):
     class Meta:
         verbose_name = _('Statistika bandi')
         verbose_name_plural = _('Statistika bandlari')
-        ordering = ['order_index', 'id']
 
     def __str__(self):
         return f"{self.label}: {self.value}"
@@ -184,7 +175,6 @@ class FAQ(BaseModel):
     class Meta:
         verbose_name = _('FAQ')
         verbose_name_plural = _('FAQ')
-        ordering = ['order_index', 'id']
 
     def __str__(self):
         return self.question
@@ -228,7 +218,6 @@ class Inquiry(BaseModel):
     class Meta:
         verbose_name = _('Murojaat')
         verbose_name_plural = _('Murojaatlar')
-        ordering = ['-created_at']
 
     def __str__(self):
         return f"{self.full_name} — {self.get_inquiry_type_display()}"
@@ -252,7 +241,6 @@ class DownloadableFile(BaseModel):
     class Meta:
         verbose_name = _('Yuklab olinadigan fayl')
         verbose_name_plural = _('Yuklab olinadigan fayllar')
-        ordering = ['category', 'title']
 
     def __str__(self):
         return self.title
@@ -281,7 +269,6 @@ class NewsPost(BaseModel):
     class Meta:
         verbose_name = _('Yangilik')
         verbose_name_plural = _('Yangiliklar')
-        ordering = ['-published_at', '-created_at']
 
     def __str__(self):
         return self.title
@@ -299,7 +286,6 @@ class Testimonial(BaseModel):
     class Meta:
         verbose_name = _('Testimonial')
         verbose_name_plural = _('Testimonials')
-        ordering = ['-is_featured', '-created_at']
 
     def __str__(self):
         return f"{self.author_name} — {self.company or ''}".strip()

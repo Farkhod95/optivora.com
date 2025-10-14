@@ -16,7 +16,7 @@ urlpatterns = [
     re_path(r'^auth/token/refresh/$', TokenRefreshView.as_view(), name='token_refresh'),
     re_path(r'^auth/logout/$', LogoutView.as_view(), name='auth_logout'),
     path('', include('users.urls')),
-    # path('', include('optivora.urls')),
+    path('', include('optivora.urls')),
     path('', include('directory.urls')),
     re_path(r'^settings/languages/$', LanguagesView.as_view(), name='languages_list'),
     re_path(r'^settings/translations/$', TermView.as_view(), name='translations_list'),

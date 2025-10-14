@@ -7,12 +7,9 @@ import os, sys
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-env = environ.Env()
-environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
-
 SECRET_KEY = 'django-insecure-12345yourkeyhere54321'
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     "api.optivora-group.com", "optivora-group.com", "www.optivora-group.com",
@@ -35,7 +32,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',
     'django_filters',
     'corsheaders',
-    # 'optivora',
+    'optivora',
     'directory',
     'django_celery_results',
     'django_celery_beat',
@@ -86,8 +83,7 @@ TEMPLATES = [
     },
 ]
 
-# WSGI_APPLICATION = 'main.wsgi.application'
-ASGI_APPLICATION = 'main.asgi.application'
+WSGI_APPLICATION = "main.wsgi.application"
 
 ### Local Host uchun
 
@@ -185,15 +181,10 @@ LANGUAGE_CODE = 'uz'
 
 # Static files (CSS, JavaScript, Images)
 
-STATIC_URL = '/static/'
-
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, "static")
-# ]
+STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-# WhiteNoise’ga tavsiya etiladigan storage:
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 AUTH_USER_MODEL = 'users.User'
 

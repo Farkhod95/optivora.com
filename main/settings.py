@@ -58,6 +58,7 @@ CORS_ORIGIN_ALLOW_ALL = False
 
 CORS_ALLOWED_ORIGINS = [
     "https://optivora-group.com",
+    "http://optivora.universal-uz.uz/",
     "http://localhost:3000",  # agar lokalda ishlayotgan bo‘lsa
     "http://localhost:5173",  # agar lokalda ishlayotgan bo‘lsa
 ]

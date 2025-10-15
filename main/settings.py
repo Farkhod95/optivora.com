@@ -8,7 +8,6 @@ SECRET_KEY = 'django-insecure-12345yourkeyhere54321'
 DEBUG = True
 
 ALLOWED_HOSTS = ["*",]
-APPEND_SLASH = False
 
 INSTALLED_APPS = [
     'modeltranslation',

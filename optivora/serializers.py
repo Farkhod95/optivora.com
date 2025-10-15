@@ -67,7 +67,6 @@ class CompanyProfileSerializer(LocaleSerializer):
         'id', 'name', 'name_en', 'name_uz', 'name_ru', 'logo', 'email', 'phone', 'address', 'business_hours', 'title',
         'title_en', 'title_uz', 'title_ru', 'description', 'description_en', 'description_uz', 'description_ru')
         extra_kwargs = {
-            'name': {"required": True},
             'name_en': {"required": True},
             'name_uz': {"required": True},
             'name_ru': {"required": True},
@@ -88,7 +87,6 @@ class IndustrySerializer(LocaleSerializer):
         fields = ('id', 'name', 'name_en', 'name_uz', 'name_ru', 'slug', 'short_description', 'description', 'icon',
                   'order_index')
         extra_kwargs = {
-            'name': {"required": True},
             'name_en': {"required": True},
             'name_uz': {"required": True},
             'name_ru': {"required": True},

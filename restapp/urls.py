@@ -12,16 +12,16 @@ from restapp.views.translations import TranslationsView
 from restapp.views.user_log import UserLogsView
 
 urlpatterns = [
-    re_path(r'^auth/token/$', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    re_path(r'^auth/token/refresh/$', TokenRefreshView.as_view(), name='token_refresh'),
-    re_path(r'^auth/logout/$', LogoutView.as_view(), name='auth_logout'),
+    re_path(r'^auth/token$', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    re_path(r'^auth/token/refresh$', TokenRefreshView.as_view(), name='token_refresh'),
+    re_path(r'^auth/logout$', LogoutView.as_view(), name='auth_logout'),
     path('', include('users.urls')),
     path('', include('optivora.urls')),
     path('', include('directory.urls')),
-    re_path(r'^settings/languages/$', LanguagesView.as_view(), name='languages_list'),
-    re_path(r'^settings/translations/$', TermView.as_view(), name='translations_list'),
+    re_path(r'^settings/languages$', LanguagesView.as_view(), name='languages_list'),
+    re_path(r'^settings/translations$', TermView.as_view(), name='translations_list'),
     path('settings/translations/<int:pk>', TermDetailView.as_view(), name='translations_list'),
-    re_path(r'^settings/userlogs/$', UserLogsView.as_view(), name='user_logs'),
+    re_path(r'^settings/userlogs$', UserLogsView.as_view(), name='user_logs'),
     path('translations', TranslationsView.as_view(), name='translations_list'),
 ]
 

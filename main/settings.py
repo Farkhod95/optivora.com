@@ -7,8 +7,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'django-insecure-12345yourkeyhere54321'
 DEBUG = True
 
-APPEND_SLASH=False
-
 ALLOWED_HOSTS = ["*",]
 
 INSTALLED_APPS = [

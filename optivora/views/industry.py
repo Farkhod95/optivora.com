@@ -4,6 +4,7 @@ from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIV
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.permissions import AllowAny
 
 from optivora.filterset import IndustrysFilter
 from optivora.models import Industry
@@ -30,6 +31,20 @@ class IndustryFieldInfoView(APIView):
             })
 
         return Response(field_info)
+
+
+class IndustryViewList(ListCreateAPIView):
+    serializer_class = IndustrySerializer
+    pagination_class = ResultsSetPagination
+    filter_backends = (filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend)
+    filterset_class = IndustrysFilter
+    search_fields = ('name', 'slug')
+    ordering = ['pk']
+    permission_classes = (AllowAny,)
+    http_method_names = ['get']
+
+    def get_queryset(self):
+        return Industry.objects.all()
 
 
 class IndustryView(ListCreateAPIView):

@@ -5,6 +5,7 @@ from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIV
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.permissions import AllowAny
 
 from optivora.filterset import InquiryFilter
 from optivora.models import Inquiry
@@ -29,6 +30,26 @@ class InquiryFieldInfoView(APIView):
                 "choices": dict(field.choices) if field.choices else None
             })
         return Response(field_info)
+
+
+class InquiryViewList(ListCreateAPIView):
+    serializer_class = InquirySerializer
+    pagination_class = ResultsSetPagination
+    filter_backends = (filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend)
+    filterset_class = InquiryFilter
+    search_fields = ('full_name', 'company')
+    ordering = ['pk']
+    permission_classes = (AllowAny,)
+    # http_method_names = ['get']
+
+    def get_queryset(self):
+        return Inquiry.objects.all()
+
+    def post(self, request):
+        serializer = InquirySerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save(created_by=self.request.user)
+        return Response(serializer.data, status.HTTP_201_CREATED)
 
 
 class InquiryView(ListCreateAPIView):

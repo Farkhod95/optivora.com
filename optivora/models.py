@@ -31,7 +31,7 @@ class CompanyProfile(BaseModel):
 class Industry(BaseModel):
     """Sektorlar (Industries We Serve): Power Generation, Water & Wastewater va h.k."""
     name = models.CharField(_('Nomi'), max_length=120, null=True, blank=True, unique=True, help_text=_('Sektor nomi (masalan: Power Generation)'))  # Unikal nom
-    slug = models.SlugField(_('Slug'), max_length=140, unique=True, help_text=_('URL uchun unikal identifikator (kichik lotin, tire)'))  # URL-friendly
+    slug = models.SlugField(_('Slug'), max_length=140, unique=True, null=True, blank=True, help_text=_('URL uchun unikal identifikator (kichik lotin, tire)'))  # URL-friendly
     short_description = models.CharField(_('Qisqa tavsif'), max_length=255, null=True, blank=True, help_text=_('Sektor bo‘yicha qisqa bir jumla'))  # Kartochka uchun
     description = models.TextField(_('Tavsif'), null=True, blank=True, help_text=_('Sektor haqida batafsil tavsif (ixtiyoriy)'))  # SEO/Detail
     icon = models.ImageField(upload_to='industries/icons/%Y/%m/', null=True, blank=True, help_text=_('Sektor ikonkasi (ixtiyoriy)'))  # UI ikona
@@ -63,7 +63,7 @@ class EquipmentCategory(BaseModel):
 class Service(BaseModel):
     """Xizmatlar (Solutions & Services): Equipment Supply, Technical Coordination va h.k."""
     name = models.CharField(_('Xizmat nomi'), null=True, blank=True, max_length=150, unique=True, help_text=_('Xizmatning to‘liq nomi (masalan: Equipment Supply & Procurement)'))  # Unikal nom
-    slug = models.SlugField(_('Slug'), max_length=160, unique=True, help_text=_('URL uchun unikal identifikator'))  # URL-friendly
+    slug = models.SlugField(_('Slug'), max_length=160, unique=True, null=True, blank=True, help_text=_('URL uchun unikal identifikator'))  # URL-friendly
     short_description = models.CharField(_('Qisqa tavsif'), max_length=255, null=True, blank=True, help_text=_('Xizmat bo‘yicha qisqacha jumla'))  # Kartochka qisqacha matn
     description = models.TextField(_('Batafsil tavsif'), null=True, blank=True, help_text=_('Xizmat tafsilotlari (ixtiyoriy)'))  # Batafsil matn
     icon = models.ImageField(upload_to='services/icons/%Y/%m/', null=True, blank=True, help_text=_('Xizmat ikonkasi (ixtiyoriy)'))  # UI ikona
@@ -89,7 +89,7 @@ class Partner(BaseModel):
         ELECTRICAL_POWER = 'electrical_power', _('Electrical & Power Components')
 
     name = models.CharField(_('Nomi'), max_length=160, null=True, blank=True, unique=True, help_text=_('Hamkor/manufacturer nomi'))  # Masalan: Statron
-    category = models.CharField(_('Kategoriya'), max_length=40, choices=CATEGORY.choices, help_text=_('Hamkor toifasi'))  # Tanlov: bo‘lim
+    category = models.CharField(_('Kategoriya'), max_length=40, null=True, blank=True, choices=CATEGORY.choices, help_text=_('Hamkor toifasi'))  # Tanlov: bo‘lim
     logo = models.ImageField(upload_to='partners/logos/%Y/%m/', null=True, blank=True, help_text=_('Hamkor logotipi (ixtiyoriy)'))  # PNG/JPG
     website = models.URLField(_('Veb-sayt'), null=True, blank=True, help_text=_('Rasmiy veb-sayt manzili (ixtiyoriy)'))  # https://...
     description = models.TextField(_('Qisqa tavsif'), null=True, blank=True, help_text=_('Hamkor haqida qisqa tavsif (ixtiyoriy)'))  # Katalog matni
@@ -108,7 +108,7 @@ class Partner(BaseModel):
 class Project(BaseModel):
     """Loyihalar/References: Projects & Experience sahifasi uchun karta/grid ko‘rinishidagi yozuvlar."""
     title = models.CharField(_('Loyiha nomi'), max_length=200, null=True, blank=True, help_text=_('Loyiha to‘liq nomi'))  # Karta sarlavhasi
-    slug = models.SlugField(_('Slug'), max_length=220, unique=True, help_text=_('URL uchun unikal identifikator'))  # URL-friendly
+    slug = models.SlugField(_('Slug'), max_length=220, unique=True, null=True, blank=True, help_text=_('URL uchun unikal identifikator'))  # URL-friendly
     country = models.ForeignKey(Country, null=True, blank=True, on_delete=models.CASCADE, related_name='project_country',
                                verbose_name=_('Loyiha'), help_text=_('Qaysi loyihaga tegishli deliverable'))
     region = models.ForeignKey(Region, null=True, blank=True, on_delete=models.CASCADE, related_name='project_region',
@@ -117,14 +117,14 @@ class Project(BaseModel):
     # location_region = models.CharField(_('Viloyat/Region'), max_length=120, null=True, blank=True, help_text=_('Loyiha joylashuvi (ixtiyoriy)'))  # Masalan: Tashkent Region
     district = models.ForeignKey(District, null=True, blank=True, on_delete=models.CASCADE, related_name='project_district',
                                verbose_name=_('Loyiha'), help_text=_('Qaysi loyihaga tegishli deliverable'))
-    year = models.PositiveSmallIntegerField(_('Yil'), validators=[MinValueValidator(1990), MaxValueValidator(2100)], help_text=_('Loyiha yilini kiriting (masalan: 2025)'))  # Filtr/ko‘rsatish uchun
+    year = models.PositiveSmallIntegerField(_('Yil'), validators=[MinValueValidator(1990), MaxValueValidator(2100)], null=True, blank=True, help_text=_('Loyiha yilini kiriting (masalan: 2025)'))  # Filtr/ko‘rsatish uchun
     scope = models.CharField(_('Qamrov (scope)'), max_length=255, null=True, blank=True, help_text=_('Masalan: Supply of advanced power electronics and control systems'))  # Qisqacha scope
     summary = models.TextField(_('Qisqa izoh'), null=True, blank=True, help_text=_('Loyiha haqida qisqa sharh (ixtiyoriy)'))  # Batafsil
     featured_image = models.ImageField(upload_to='projects/featured/%Y/%m/', null=True, blank=True, help_text=_('Asosiy rasm (ixtiyoriy)'))  # Karta rasmi
     industries = models.ManyToManyField(Industry, related_name='projects', blank=True, verbose_name=_('Sektorlar'), help_text=_('Loyiha tegishli sektorlar (ixtiyoriy)'))  # Aloqa: sektor
     equipment_categories = models.ManyToManyField(EquipmentCategory, related_name='projects', blank=True, verbose_name=_('Uskuna kategoriyalari'), help_text=_('Loyihadagi uskunalar toifalari (ixtiyoriy)'))  # Aloqa: uskunalar
     partners = models.ManyToManyField(Partner, related_name='projects', blank=True, verbose_name=_('Hamkorlar'), help_text=_('Loyihada ishtirok etgan hamkorlar (ixtiyoriy)'))  # Aloqa: hamkor
-    is_featured = models.BooleanField(default=False, verbose_name=_('Tavsiya etilgan'), help_text=_('Bosh sahifada yoki ro‘yxat tepasida ko‘rsatish'))  # Flag
+    is_featured = models.BooleanField(default=False, verbose_name=_('Tavsiya etilgan'), null=True, blank=True, help_text=_('Bosh sahifada yoki ro‘yxat tepasida ko‘rsatish'))  # Flag
     order_index = models.PositiveIntegerField(default=0, verbose_name=_('Tartib'), help_text=_('Chop etish tartibi'))  # Sortlash
 
     class Meta:
@@ -151,7 +151,7 @@ class ProjectDeliverable(BaseModel):
 class ProjectImage(BaseModel):
     """Loyiha galereyasi rasmlari: lightbox/modal uchun tartib bilan."""
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='images', verbose_name=_('Loyiha'), help_text=_('Rasm tegishli loyihasi'))  # FK: Project
-    image = models.ImageField(upload_to='projects/gallery/%Y/%m/', help_text=_('Loyiha galereyasi rasmi'))  # JPG/PNG
+    image = models.ImageField(upload_to='projects/gallery/%Y/%m/', null=True, blank=True, help_text=_('Loyiha galereyasi rasmi'))  # JPG/PNG
     caption = models.CharField(_('Sarlavha'), max_length=200, null=True, blank=True, help_text=_('Rasm izohi (ixtiyoriy)'))  # Caption
     order_index = models.PositiveIntegerField(default=0, verbose_name=_('Tartib'), help_text=_('Galereyada ko‘rinish tartibi'))  # Tartib
 
@@ -179,8 +179,8 @@ class StatItem(BaseModel):
 
 class FAQ(BaseModel):
     """Tez-tez so‘raladigan savollar: Contact sahifasi ostida ko‘rsatiladi."""
-    question = models.CharField(_('Savol'), max_length=255, help_text=_('Ko‘p so‘raladigan savol matni'))  # Savol
-    answer = models.TextField(_('Javob'), help_text=_('Savolga javob matni'))  # Javob matni
+    question = models.CharField(_('Savol'), max_length=255, null=True, blank=True, help_text=_('Ko‘p so‘raladigan savol matni'))  # Savol
+    answer = models.TextField(_('Javob'), null=True, blank=True, help_text=_('Savolga javob matni'))  # Javob matni
     order_index = models.PositiveIntegerField(default=0, verbose_name=_('Tartib'), help_text=_('Chop etish tartibi'))  # Sortlash
 
     class Meta:
@@ -217,11 +217,11 @@ class Inquiry(BaseModel):
     company = models.CharField(_('Tashkilot'), max_length=160, null=True, blank=True, help_text=_('Murojaatchi tashkiloti yoki kompaniyasi'))  # Kompaniya nomi
     email = models.EmailField(_('Email'), max_length=254, null=True, blank=True, help_text=_('Aloqa uchun e-pochta manzili'))  # E-mail
     phone = models.CharField(_('Telefon'), max_length=64, null=True, blank=True, help_text=_('Aloqa uchun telefon (ixtiyoriy)'))  # Telefon
-    inquiry_type = models.CharField(_('Murojaat turi'), max_length=20, choices=INQUIRY_TYPE.choices, help_text=_('So‘rov turi'))  # Turi
+    inquiry_type = models.CharField(_('Murojaat turi'), max_length=20, choices=INQUIRY_TYPE.choices, null=True, blank=True, help_text=_('So‘rov turi'))  # Turi
     project_sector = models.CharField(_('Sohasi'), max_length=32, choices=PROJECT_SECTOR.choices, null=True, blank=True, help_text=_('Loyiha sohasi (ixtiyoriy)'))  # Sektor
     message = models.TextField(_('Xabar / tafsilotlar'), help_text=_('Texnik talablar, muddat va boshqa tafsilotlar'))  # Matn
     attachment = models.FileField(upload_to='inquiries/attachments/%Y/%m/', null=True, blank=True, validators=[FileExtensionValidator(allowed_extensions=['pdf', 'doc', 'docx', 'xls', 'xlsx'])], help_text=_('Ilova fayl (PDF, DOC, XLS — 10MB gacha, ixtiyoriy)'))  # Fayl
-    consent_updates = models.BooleanField(default=False, verbose_name=_('Yangiliklarga rozilik'), help_text=_('Yangiliklar haqida xabarnoma olishga rozilik'))  # Checkbox
+    consent_updates = models.BooleanField(default=False, verbose_name=_('Yangiliklarga rozilik'), null=True, blank=True, help_text=_('Yangiliklar haqida xabarnoma olishga rozilik'))  # Checkbox
     status = models.CharField(_('Holat'), max_length=20, choices=STATUS.choices, default=STATUS.NEW, help_text=_('Murojaat holati'))  # Workflow status
     ip_address = models.GenericIPAddressField(_('IP manzil'), null=True, blank=True, help_text=_('Murojaat yuborilgan IP manzil (ixtiyoriy)'))  # Audit
     user_agent = models.TextField(_('User-Agent'), null=True, blank=True, help_text=_('Brauzer identifikatori (ixtiyoriy)'))  # Audit
@@ -244,7 +244,7 @@ class DownloadableFile(BaseModel):
         OTHER = 'other', _('Other')
 
     title = models.CharField(_('Sarlavha'), max_length=200, null=True, blank=True, help_text=_('Fayl sarlavhasi'))  # Nom
-    category = models.CharField(_('Kategoriya'), max_length=20, choices=FILE_CATEGORY.choices, help_text=_('Fayl toifasi'))  # Toifa
+    category = models.CharField(_('Kategoriya'), max_length=20, null=True, blank=True, choices=FILE_CATEGORY.choices, help_text=_('Fayl toifasi'))  # Toifa
     description = models.TextField(_('Tavsif'), null=True, blank=True, help_text=_('Qisqa tavsif (ixtiyoriy)'))  # Izoh
     file = models.FileField(upload_to='downloads/%Y/%m/', validators=[FileExtensionValidator(allowed_extensions=['pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx'])], help_text=_('Yuklanadigan fayl'))  # Fayl kontenti
     is_public = models.BooleanField(default=True, verbose_name=_('Ommaviy'), help_text=_('Hamma uchun ko‘rinadimi'))  # Public flag
@@ -269,8 +269,8 @@ class NewsPost(BaseModel):
         COMPANY = 'company_announcements', _('Company Announcements')
 
     title = models.CharField(_('Sarlavha'), max_length=200, null=True, blank=True, help_text=_('Yangilik sarlavhasi'))  # Sarlavha
-    slug = models.SlugField(_('Slug'), max_length=220, unique=True, help_text=_('URL uchun unikal identifikator'))  # URL-friendly
-    category = models.CharField(_('Kategoriya'), max_length=40, choices=CATEGORY.choices, help_text=_('Yangilik toifasi'))  # Toifa
+    slug = models.SlugField(_('Slug'), max_length=220, unique=True, null=True, blank=True, help_text=_('URL uchun unikal identifikator'))  # URL-friendly
+    category = models.CharField(_('Kategoriya'), max_length=40, null=True, blank=True, choices=CATEGORY.choices, help_text=_('Yangilik toifasi'))  # Toifa
     excerpt = models.CharField(_('Qisqa matn'), max_length=255, null=True, blank=True, help_text=_('Qisqa kirish matni (ixtiyoriy)'))  # Qisqa preview
     body = models.TextField(_('Matn'), null=True, blank=True, help_text=_('To‘liq matn'))  # Kontent
     cover_image = models.ImageField(upload_to='news/covers/%Y/%m/', null=True, blank=True, help_text=_('Muqova rasmi (ixtiyoriy)'))  # Muqova

@@ -5,6 +5,7 @@ from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIV
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.permissions import AllowAny
 
 from optivora.filterset import ProjectImageFilter
 from optivora.models import ProjectImage
@@ -29,6 +30,19 @@ class ProjectImageFieldInfoView(APIView):
                 "choices": dict(field.choices) if field.choices else None
             })
         return Response(field_info)
+
+class ProjectImageViewList(ListCreateAPIView):
+    serializer_class = ProjectImageSerializer
+    pagination_class = ResultsSetPagination
+    filter_backends = (filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend)
+    filterset_class = ProjectImageFilter
+    search_fields = ('caption', 'caption_en')
+    ordering = ['pk']
+    permission_classes = (AllowAny,)
+    http_method_names = ['get']
+
+    def get_queryset(self):
+        return ProjectImage.objects.all()
 
 
 class ProjectImageView(ListCreateAPIView):

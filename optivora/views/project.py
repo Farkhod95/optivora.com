@@ -5,6 +5,7 @@ from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIV
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.permissions import AllowAny
 
 from optivora.filterset import ProjectFilter
 from optivora.models import Project
@@ -29,6 +30,20 @@ class ProjectFieldInfoView(APIView):
                 "choices": dict(field.choices) if field.choices else None
             })
         return Response(field_info)
+
+
+class ProjectViewList(ListCreateAPIView):
+    serializer_class = ProjectSerializer
+    pagination_class = ResultsSetPagination
+    filter_backends = (filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend)
+    filterset_class = ProjectFilter
+    search_fields = ('title', 'summary')
+    ordering = ['pk']
+    permission_classes = (AllowAny,)
+    http_method_names = ['get']
+
+    def get_queryset(self):
+        return Project.objects.all()
 
 
 class ProjectView(ListCreateAPIView):

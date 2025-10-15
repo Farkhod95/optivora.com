@@ -104,7 +104,7 @@ class EquipmentCategorySerializer(BaseLocaleSerializer):
     class Meta:
         model = EquipmentCategory
         fields = '__all__'
-        read_only_fields = ('id', 'created_at', 'updated_at', 'created_by', 'updated_by')
+        read_only_fields = ('id', 'created_time', 'updated_time', 'created_by', 'updated_by')
 
 
 class ServiceSerializer(BaseLocaleSerializer):
@@ -118,7 +118,7 @@ class ServiceSerializer(BaseLocaleSerializer):
     class Meta:
         model = Service
         fields = '__all__'
-        read_only_fields = ('id', 'created_at', 'updated_at', 'created_by', 'updated_by')
+        read_only_fields = ('id', 'created_time', 'updated_time', 'created_by', 'updated_by')
 
 
 class PartnerSerializer(BaseLocaleSerializer):
@@ -132,7 +132,7 @@ class PartnerSerializer(BaseLocaleSerializer):
     class Meta:
         model = Partner
         fields = '__all__'
-        read_only_fields = ('id', 'created_at', 'updated_at', 'created_by', 'updated_by')
+        read_only_fields = ('id', 'created_time', 'updated_time', 'created_by', 'updated_by')
 
 
 class ProjectSerializer(BaseLocaleSerializer):
@@ -152,60 +152,60 @@ class ProjectSerializer(BaseLocaleSerializer):
     class Meta:
         model = Project
         fields = '__all__'
-        read_only_fields = ('id', 'created_at', 'updated_at', 'created_by', 'updated_by')
+        read_only_fields = ('id', 'created_time', 'updated_time', 'created_by', 'updated_by')
 
 
 class ProjectDeliverableSerializer(BaseLocaleSerializer):
     class Meta:
         model = ProjectDeliverable
         fields = '__all__'
-        read_only_fields = ('id', 'created_at', 'updated_at', 'created_by', 'updated_by')
+        read_only_fields = ('id', 'created_time', 'updated_time', 'created_by', 'updated_by')
 
 
 class ProjectImageSerializer(BaseLocaleSerializer):
     class Meta:
         model = ProjectImage
         fields = '__all__'
-        read_only_fields = ('id', 'created_at', 'updated_at', 'created_by', 'updated_by')
+        read_only_fields = ('id', 'created_time', 'updated_time', 'created_by', 'updated_by')
 
 
 class StatItemSerializer(BaseLocaleSerializer):
     class Meta:
         model = StatItem
         fields = '__all__'
-        read_only_fields = ('id', 'created_at', 'updated_at', 'created_by', 'updated_by')
+        read_only_fields = ('id', 'created_time', 'updated_time', 'created_by', 'updated_by')
 
 
 class FAQSerializer(BaseLocaleSerializer):
     class Meta:
         model = FAQ
         fields = '__all__'
-        read_only_fields = ('id', 'created_at', 'updated_at', 'created_by', 'updated_by')
+        read_only_fields = ('id', 'created_time', 'updated_time', 'created_by', 'updated_by')
 
 
 class InquirySerializer(BaseLocaleSerializer):
     class Meta:
         model = Inquiry
         fields = '__all__'
-        read_only_fields = ('id', 'created_at', 'updated_at', 'created_by', 'updated_by')
+        read_only_fields = ('id', 'updated_time', 'created_by', 'updated_by')
 
 
 class DownloadableFileSerializer(BaseLocaleSerializer):
     class Meta:
         model = DownloadableFile
         fields = '__all__'
-        read_only_fields = ('id', 'created_at', 'updated_at', 'created_by', 'updated_by')
+        read_only_fields = ('id', 'created_time', 'updated_time', 'created_by', 'updated_by')
 
 
 class NewsPostSerializer(BaseLocaleSerializer):
     class Meta:
         model = NewsPost
         fields = '__all__'
-        read_only_fields = ('id', 'created_at', 'updated_at', 'created_by', 'updated_by')
+        read_only_fields = ('id', 'created_time', 'updated_time', 'created_by', 'updated_by')
 
 
 class TestimonialSerializer(BaseLocaleSerializer):
     class Meta:
         model = Testimonial
         fields = '__all__'
-        read_only_fields = ('id', 'created_at', 'updated_at', 'created_by', 'updated_by')
+        read_only_fields = ('id', 'created_time', 'updated_time', 'created_by', 'updated_by')

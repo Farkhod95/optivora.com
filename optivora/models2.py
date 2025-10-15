@@ -109,13 +109,13 @@ class Project(BaseModel):
     """Loyihalar/References: Projects & Experience sahifasi uchun karta/grid ko‘rinishidagi yozuvlar."""
     title = models.CharField(_('Loyiha nomi'), max_length=200, help_text=_('Loyiha to‘liq nomi'))  # Karta sarlavhasi
     slug = models.SlugField(_('Slug'), max_length=220, unique=True, help_text=_('URL uchun unikal identifikator'))  # URL-friendly
-    country = models.ForeignKey(Country, null=True, blank=True, on_delete=models.CASCADE, related_name='project_country',
+    country = models.ForeignKey(Country, on_delete=models.CASCADE, related_name='project_country',
                                verbose_name=_('Loyiha'), help_text=_('Qaysi loyihaga tegishli deliverable'))
-    region = models.ForeignKey(Region, null=True, blank=True, on_delete=models.CASCADE, related_name='project_region',
+    region = models.ForeignKey(Region, on_delete=models.CASCADE, related_name='project_region',
                                 verbose_name=_('Loyiha'), help_text=_('Qaysi loyihaga tegishli deliverable'))
     # location_city = models.CharField(_('Shahar'), max_length=120, null=True, blank=True, help_text=_('Loyiha shahri (ixtiyoriy)'))  # Masalan: Tashkent
     # location_region = models.CharField(_('Viloyat/Region'), max_length=120, null=True, blank=True, help_text=_('Loyiha joylashuvi (ixtiyoriy)'))  # Masalan: Tashkent Region
-    district = models.ForeignKey(District, null=True, blank=True, on_delete=models.CASCADE, related_name='project_district',
+    district = models.ForeignKey(District, on_delete=models.CASCADE, related_name='project_district',
                                verbose_name=_('Loyiha'), help_text=_('Qaysi loyihaga tegishli deliverable'))
     year = models.PositiveSmallIntegerField(_('Yil'), validators=[MinValueValidator(1990), MaxValueValidator(2100)], help_text=_('Loyiha yilini kiriting (masalan: 2025)'))  # Filtr/ko‘rsatish uchun
     scope = models.CharField(_('Qamrov (scope)'), max_length=255, help_text=_('Masalan: Supply of advanced power electronics and control systems'))  # Qisqacha scope

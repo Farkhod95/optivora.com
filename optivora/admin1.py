@@ -59,7 +59,7 @@ class ProjectAdmin(admin.ModelAdmin):
     fields = (
         'title', 'title_en', 'title_uz', 'title_ru', 'slug', 'country', 'region', 'district', 'year', 'scope', 'summary',
         'featured_image', 'industries', 'equipment_categories', 'partners',
-        'is_featured', 'order_index',
+        'is_featured', 'order_index', 
     )
     search_fields = ('title', 'slug', 'scope', 'summary')
 

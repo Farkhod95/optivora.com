@@ -65,7 +65,7 @@ class CompanyProfileSerializer(LocaleSerializer):
         model = CompanyProfile
         fields = (
         'id', 'name', 'name_en', 'name_uz', 'name_ru', 'logo', 'email', 'phone', 'address', 'business_hours', 'title',
-        'title_en', 'title_uz', 'title_ru', 'description', 'description_en', 'description_uz', 'description_ru')
+        'title_en', 'title_uz', 'titleru', 'description', 'description_en', 'description_uz', 'description_ru')
         extra_kwargs = {
             'name': {"required": True},
             'name_en': {"required": True},

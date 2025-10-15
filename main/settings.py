@@ -2,7 +2,6 @@ import os
 from datetime import timedelta
 from django.utils.translation import gettext_lazy as _
 from corsheaders.defaults import default_headers
-import environ
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = 'django-insecure-12345yourkeyhere54321'
@@ -87,7 +86,16 @@ FILE_UPLOAD_MAX_MEMORY_SIZE = 52428800
 
 WSGI_APPLICATION = 'main.wsgi.application'
 
-
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'optivora_db',
+#         'USER': 'postgres',
+#         'PASSWORD': 'root',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
@@ -105,6 +113,8 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+
+
 
 
 # Password validation

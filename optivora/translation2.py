@@ -18,6 +18,11 @@ class EquipmentCategoryTranslationOptions(TranslationOptions):
     fields = ('name', 'description')
 
 
+@register(Industry)
+class IndustryTranslationOptions(TranslationOptions):
+    fields = ('name', 'short_description', 'description')
+
+
 @register(Service)
 class ServiceTranslationOptions(TranslationOptions):
     fields = ('name', 'short_description', 'description')

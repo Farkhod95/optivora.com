@@ -54,11 +54,12 @@ MIDDLEWARE = [
 #     "https://api.optivora-group.com",
 #     "http://localhost:3000",
 # ]
+CORS_ORIGIN_ALLOW_ALL = False
+
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
+    "https://optivora-group.com",
+    "http://localhost:3000",  # agar lokalda ishlayotgan bo‘lsa
+    "http://localhost:5173",  # agar lokalda ishlayotgan bo‘lsa
 ]
 
 ROOT_URLCONF = 'main.urls'

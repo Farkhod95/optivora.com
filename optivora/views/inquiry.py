@@ -37,7 +37,7 @@ class InquiryView(ListCreateAPIView):
     filter_backends = (filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend)
     filterset_class = InquiryFilter
     search_fields = ('full_name', 'company', 'email', 'phone', 'message')
-    ordering = ['-created_at', 'pk']
+    ordering = ['pk']
 
     def get_queryset(self):
         return Inquiry.objects.all()

@@ -7,7 +7,7 @@ from rest_framework_swagger.views import get_swagger_view
 from restapp.urls import urlpatterns as rest_urlpatterns
 # from inspektor.view import index
 
-api_title = 'Optivora API documentation 1'
+api_title = 'Optivora API documentation'
 schema_view = get_swagger_view(title=api_title, patterns=rest_urlpatterns, url='/api/v1/')
 
 urlpatterns = [

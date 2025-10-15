@@ -21,7 +21,7 @@ from .models import (
 @admin.register(CompanyProfile)
 class CompanyProfileAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'phone')
-    fields = ('name', 'name_en', 'name_uz', 'name_ru', 'logo', 'email', 'phone', 'address', 'business_hours', 'title', 'title_en', 'title_uz', 'titleru', 'description', 'description_en', 'description_uz', 'description_ru',)
+    fields = ('name', 'name_en', 'name_uz', 'name_ru', 'logo', 'email', 'phone', 'address', 'business_hours', 'title', 'title_en', 'title_uz', 'title_ru', 'description', 'description_en', 'description_uz', 'description_ru',)
     search_fields = ('name', 'email', 'phone', 'address')
 
 

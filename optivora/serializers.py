@@ -33,7 +33,7 @@ class BaseLocaleSerializer(serializers.ModelSerializer):
     """
     TRANSLATABLE_BASES = [
         # eng ko‘p uchraydiganlar
-        'name', 'title', 'label', 'description', 'short_description',
+        'name', 'title', 'label', 'description',
         'summary', 'caption', 'excerpt', 'body', 'scope',
         'question', 'answer', 'quote', 'author_role', 'company',
     ]
@@ -84,7 +84,7 @@ class CompanyProfileListSerializer(LocaleSerializer):
 class IndustrySerializer(LocaleSerializer):
     class Meta:
         model = Industry
-        fields = ('id', 'name', 'name_en', 'name_uz', 'name_ru', 'slug', 'short_description', 'description', 'icon',
+        fields = ('id', 'name', 'name_en', 'name_uz', 'name_ru', 'slug', 'description', 'icon',
                   'order_index')
         extra_kwargs = {
             'name_en': {"required": True},
@@ -96,7 +96,7 @@ class IndustrySerializer(LocaleSerializer):
 class IndustryListSerializer(LocaleSerializer):
     class Meta:
         model = Industry
-        fields = ('id', 'name', 'name_en', 'name_uz', 'name_ru', 'slug', 'short_description', 'description', 'icon',
+        fields = ('id', 'name', 'name_en', 'name_uz', 'name_ru', 'slug', 'description', 'icon',
                   'order_index')
 
 

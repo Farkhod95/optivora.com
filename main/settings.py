@@ -7,10 +7,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'django-insecure-12345yourkeyhere54321'
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    "api.optivora-group.com", "optivora-group.com", "www.optivora-group.com",
-    "localhost", "127.0.0.1", '45.138.159.166',
-]
+ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
     'modeltranslation',
@@ -49,14 +46,14 @@ MIDDLEWARE = [
     'django.middleware.locale.LocaleMiddleware',  # for translation
 ]
 
-CORS_ORIGIN_ALLOW_ALL = False
-
-CORS_ALLOWED_ORIGINS = [
-    "https://optivora-group.com",
-    "https://www.optivora-group.com",
-    "https://api.optivora-group.com",
-    "http://localhost:3000",
-]
+# CORS_ORIGIN_ALLOW_ALL = False
+#
+# CORS_ALLOWED_ORIGINS = [
+#     "https://optivora-group.com",
+#     "https://www.optivora-group.com",
+#     "https://api.optivora-group.com",
+#     "http://localhost:3000",
+# ]
 
 
 ROOT_URLCONF = 'main.urls'

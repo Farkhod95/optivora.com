@@ -38,7 +38,7 @@ class ServiceViewList(ListCreateAPIView):
     filter_backends = (filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend)
     filterset_class = ServiceFilter
     search_fields = ('name', 'description')
-    ordering = ['pk']
+    ordering = ['order_index']
     permission_classes = (AllowAny,)
     http_method_names = ['get']
 
@@ -57,7 +57,7 @@ class ServiceView(ListCreateAPIView):
         'description', 'description_en', 'description_uz', 'description_ru',
         'slug',
     )
-    ordering = ['order_index', 'pk']
+    ordering = ['order_index']
 
     def get_queryset(self):
         return Service.objects.all()

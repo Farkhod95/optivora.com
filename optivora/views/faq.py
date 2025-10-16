@@ -40,7 +40,7 @@ class FAQView(ListCreateAPIView):
         'question', 'question_en', 'question_uz', 'question_ru',
         'answer', 'answer_en', 'answer_uz', 'answer_ru'
     )
-    ordering = ['order_index', 'pk']
+    ordering = ['order_index']
 
     def get_queryset(self):
         return FAQ.objects.all()

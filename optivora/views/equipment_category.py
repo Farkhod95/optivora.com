@@ -40,7 +40,7 @@ class EquipmentCategoryViewList(ListCreateAPIView):
     search_fields = ('name', 'description')
     ordering = ['pk']
     permission_classes = (AllowAny,)
-    http_method_names = ['get']
+    http_method_names = ['order_index']
 
     def get_queryset(self):
         return EquipmentCategory.objects.all()
@@ -56,7 +56,7 @@ class EquipmentCategoryView(ListCreateAPIView):
         'description', 'description_en', 'description_uz', 'description_ru',
         'slug',
     )
-    ordering = ['order_index', 'pk']
+    ordering = ['order_index']
 
     def get_queryset(self):
         return EquipmentCategory.objects.all()

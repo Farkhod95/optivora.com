@@ -38,7 +38,7 @@ class ProjectViewList(ListCreateAPIView):
     filter_backends = (filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend)
     filterset_class = ProjectFilter
     search_fields = ('title', 'summary')
-    ordering = ['pk']
+    ordering = ['order_index']
     permission_classes = (AllowAny,)
     http_method_names = ['get']
 
@@ -59,7 +59,7 @@ class ProjectView(ListCreateAPIView):
         'location_region', 'location_region_en', 'location_region_uz', 'location_region_ru',
         'slug',
     )
-    ordering = ['-year', 'order_index', 'pk']
+    ordering = ['order_index']
 
     def get_queryset(self):
         return Project.objects.all()

@@ -37,7 +37,7 @@ class StatItemView(ListCreateAPIView):
     filter_backends = (filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend)
     filterset_class = StatItemFilter
     search_fields = ('label', 'label_en', 'label_uz', 'label_ru', 'value')
-    ordering = ['order_index', 'pk']
+    ordering = ['order_index']
 
     def get_queryset(self):
         return StatItem.objects.all()

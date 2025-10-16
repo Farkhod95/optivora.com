@@ -38,7 +38,7 @@ class PartnerViewList(ListCreateAPIView):
     filter_backends = (filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend)
     filterset_class = PartnerFilter
     search_fields = ('name', 'description')
-    ordering = ['pk']
+    ordering = ['order_index']
     permission_classes = (AllowAny,)
     http_method_names = ['get']
 
@@ -56,7 +56,7 @@ class PartnerView(ListCreateAPIView):
         'description', 'description_en', 'description_uz', 'description_ru',
         'website',
     )
-    ordering = ['order_index', 'pk']
+    ordering = ['order_index']
 
     def get_queryset(self):
         return Partner.objects.all()

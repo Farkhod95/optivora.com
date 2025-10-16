@@ -39,7 +39,7 @@ class IndustryViewList(ListCreateAPIView):
     filter_backends = (filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend)
     filterset_class = IndustrysFilter
     search_fields = ('name', 'slug')
-    ordering = ['pk']
+    ordering = ['order_index']
     permission_classes = (AllowAny,)
     http_method_names = ['get']
 
@@ -53,7 +53,7 @@ class IndustryView(ListCreateAPIView):
     filter_backends = (filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend)
     filterset_class = IndustrysFilter
     search_fields = ('name', 'slug', 'short_description')
-    ordering = ['pk']
+    ordering = ['order_index']
 
     def get_queryset(self):
         return Industry.objects.all()

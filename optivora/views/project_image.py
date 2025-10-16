@@ -37,7 +37,7 @@ class ProjectImageViewList(ListCreateAPIView):
     filter_backends = (filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend)
     filterset_class = ProjectImageFilter
     search_fields = ('caption', 'caption_en')
-    ordering = ['pk']
+    ordering = ['order_index']
     permission_classes = (AllowAny,)
     http_method_names = ['get']
 
@@ -51,7 +51,7 @@ class ProjectImageView(ListCreateAPIView):
     filter_backends = (filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend)
     filterset_class = ProjectImageFilter
     search_fields = ('caption', 'caption_en', 'caption_uz', 'caption_ru')
-    ordering = ['order_index', 'pk']
+    ordering = ['order_index']
 
     def get_queryset(self):
         return ProjectImage.objects.select_related('project').all()

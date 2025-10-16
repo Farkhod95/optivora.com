@@ -1,6 +1,6 @@
 from modeltranslation.translator import register, TranslationOptions
 
-from .models import CompanyProfile, Industry, EquipmentCategory, Service, Partner, Project, FAQ
+from .models import CompanyProfile, Industry, EquipmentCategory, Service, Partner, Project, FAQ, ProjectImage
 
 
 @register(CompanyProfile)
@@ -27,6 +27,10 @@ class ServiceTranslationOptions(TranslationOptions):
 class PartnerTranslationOptions(TranslationOptions):
     fields = ('name', 'description')
 
+
+@register(ProjectImage)
+class ProjectImageTranslationOptions(TranslationOptions):
+    fields = ('caption',)
 
 @register(Project)
 class ProjectTranslationOptions(TranslationOptions):

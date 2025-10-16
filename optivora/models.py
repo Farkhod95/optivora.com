@@ -213,13 +213,13 @@ class Inquiry(BaseModel):
         IN_PROGRESS = 'in_progress', _('In Progress')
         CLOSED = 'closed', _('Closed')
 
-    full_name = models.CharField(_('To‘liq ism'), max_length=160, help_text=_('Murojaatchi to‘liq ismi'))  # F.I.Sh
+    full_name = models.CharField(_('To‘liq ism'), max_length=160, null=True, blank=True, help_text=_('Murojaatchi to‘liq ismi'))  # F.I.Sh
     company = models.CharField(_('Tashkilot'), max_length=160, null=True, blank=True, help_text=_('Murojaatchi tashkiloti yoki kompaniyasi'))  # Kompaniya nomi
     email = models.EmailField(_('Email'), max_length=254, null=True, blank=True, help_text=_('Aloqa uchun e-pochta manzili'))  # E-mail
     phone = models.CharField(_('Telefon'), max_length=64, null=True, blank=True, help_text=_('Aloqa uchun telefon (ixtiyoriy)'))  # Telefon
     inquiry_type = models.CharField(_('Murojaat turi'), max_length=20, choices=INQUIRY_TYPE.choices, null=True, blank=True, help_text=_('So‘rov turi'))  # Turi
     project_sector = models.CharField(_('Sohasi'), max_length=32, choices=PROJECT_SECTOR.choices, null=True, blank=True, help_text=_('Loyiha sohasi (ixtiyoriy)'))  # Sektor
-    message = models.TextField(_('Xabar / tafsilotlar'), help_text=_('Texnik talablar, muddat va boshqa tafsilotlar'))  # Matn
+    message = models.TextField(_('Xabar / tafsilotlar'), null=True, blank=True, help_text=_('Texnik talablar, muddat va boshqa tafsilotlar'))  # Matn
     attachment = models.FileField(upload_to='inquiries/attachments/%Y/%m/', null=True, blank=True, validators=[FileExtensionValidator(allowed_extensions=['pdf', 'doc', 'docx', 'xls', 'xlsx'])], help_text=_('Ilova fayl (PDF, DOC, XLS — 10MB gacha, ixtiyoriy)'))  # Fayl
     consent_updates = models.BooleanField(default=False, verbose_name=_('Yangiliklarga rozilik'), null=True, blank=True, help_text=_('Yangiliklar haqida xabarnoma olishga rozilik'))  # Checkbox
     status = models.CharField(_('Holat'), max_length=20, choices=STATUS.choices, default=STATUS.NEW, help_text=_('Murojaat holati'))  # Workflow status

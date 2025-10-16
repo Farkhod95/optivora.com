@@ -48,7 +48,7 @@ class InquiryViewList(ListCreateAPIView):
     def post(self, request):
         serializer = InquirySerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        serializer.save(created_by=self.request.user)
+        serializer.save()
         return Response(serializer.data, status.HTTP_201_CREATED)
 
 

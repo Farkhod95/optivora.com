@@ -93,7 +93,7 @@ class IndustrySerializer(LocaleSerializer):
         }
 
 
-class IndustryListSerializer(LocaleSerializer):
+class IndustryListPublicSerializer(LocaleSerializer):
     class Meta:
         model = Industry
         fields = ('id', 'name', 'name_en', 'name_uz', 'name_ru', 'slug', 'description', 'icon',
@@ -106,6 +106,11 @@ class EquipmentCategorySerializer(BaseLocaleSerializer):
         fields = '__all__'
         read_only_fields = ('id', 'created_time', 'updated_time', 'created_by', 'updated_by')
 
+
+class EquipmentCategoryPublicListSerializer(BaseLocaleSerializer):
+    class Meta:
+        model = EquipmentCategory
+        fields = ('name', 'slug')
 
 class ServiceSerializer(BaseLocaleSerializer):
     industries = serializers.PrimaryKeyRelatedField(
@@ -134,6 +139,12 @@ class PartnerSerializer(BaseLocaleSerializer):
         fields = '__all__'
         read_only_fields = ('id', 'created_time', 'updated_time', 'created_by', 'updated_by')
 
+class PartnerListPublicSerializer(BaseLocaleSerializer):
+
+    class Meta:
+        model = Partner
+        fields =( 'name', 'category', 'website')
+
 
 class ProjectSerializer(BaseLocaleSerializer):
     industries = serializers.PrimaryKeyRelatedField(
@@ -145,6 +156,32 @@ class ProjectSerializer(BaseLocaleSerializer):
     partners = serializers.PrimaryKeyRelatedField(
         queryset=Partner.objects.all(), many=True, required=False
     )
+    country_detail = CountryListSerializer(source="country", read_only=True)
+    region_detail = RegionListPublicSerializer(source="region", read_only=True)
+    district_detail = DistrictListPublicSerializer(source="district", read_only=True)
+
+    class Meta:
+        model = Project
+        fields = '__all__'
+        read_only_fields = ('id', 'created_time', 'updated_time', 'created_by', 'updated_by')
+
+
+class ProjectListSerializer(BaseLocaleSerializer):
+    industries = serializers.PrimaryKeyRelatedField(
+        queryset=Industry.objects.all(), many=True, required=False
+    )
+    equipment_categories = serializers.PrimaryKeyRelatedField(
+        queryset=EquipmentCategory.objects.all(), many=True, required=False
+    )
+    partners = serializers.PrimaryKeyRelatedField(
+        queryset=Partner.objects.all(), many=True, required=False
+    )
+
+    industries_detail = IndustryListPublicSerializer(source="industries", many=True, read_only=True)
+    equipment_categories_detail = EquipmentCategoryPublicListSerializer(source="equipment_categories", many=True,
+                                                                  read_only=True)
+    partners_detail = PartnerListPublicSerializer(source="partners", many=True, read_only=True)
+
     country_detail = CountryListSerializer(source="country", read_only=True)
     region_detail = RegionListPublicSerializer(source="region", read_only=True)
     district_detail = DistrictListPublicSerializer(source="district", read_only=True)

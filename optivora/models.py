@@ -303,7 +303,7 @@ class Testimonial(BaseModel):
 
 class Banner(BaseModel):
     """Banner: homepage slider sahifa uchun."""
-    order_index = models.PositiveIntegerField(unique=True, verbose_name=_('Tartib'),
+    order_index = models.PositiveIntegerField(unique=True, verbose_name=_('Tartib'), null=True,
                                               help_text=_('Chop etish tartibi'))  # Sortlash
     title = models.CharField(_('Muallif'), max_length=160, help_text=_('Fikr muallifi to‘liq ismi'))  # Muallif
     description = models.TextField(_('Izoh'), help_text=_('Testimonial matni'))  # Iqtibos

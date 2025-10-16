@@ -292,7 +292,7 @@ class Testimonial(BaseModel):
     company = models.CharField(_('Tashkilot'), max_length=160, null=True, blank=True, help_text=_('Muallif tashkiloti (ixtiyoriy)'))  # Kompaniya
     quote = models.TextField(_('Fikr-mulohaza'), help_text=_('Testimonial matni'))  # Iqtibos
     photo = models.ImageField(upload_to='testimonials/%Y/%m/', null=True, blank=True, help_text=_('Muallif surati (ixtiyoriy)'))  # Avatar
-    is_featured = models.BooleanField(default=False, verbose_name=_('Tavsiya etilgan'), help_text=_('Bosh sahifada ajratib ko‘rsatish'))  # Flag
+    is_featured = models.BooleanField(default=True, verbose_name=_('Tavsiya etilgan'), help_text=_('Bosh sahifada ajratib ko‘rsatish'))  # Flag
 
     class Meta:
         verbose_name = _('Testimonial')
@@ -303,10 +303,12 @@ class Testimonial(BaseModel):
 
 class Banner(BaseModel):
     """Banner: homepage slider sahifa uchun."""
+    order_index = models.PositiveIntegerField(unique=True, verbose_name=_('Tartib'),
+                                              help_text=_('Chop etish tartibi'))  # Sortlash
     title = models.CharField(_('Muallif'), max_length=160, help_text=_('Fikr muallifi to‘liq ismi'))  # Muallif
     description = models.TextField(_('Izoh'), help_text=_('Testimonial matni'))  # Iqtibos
     photo = models.ImageField(upload_to='banner/%Y/%m/', null=True, blank=True, help_text=_('Muallif surati (ixtiyoriy)'))  # Avatar
-    is_featured = models.BooleanField(default=False, verbose_name=_('Tavsiya etilgan'), help_text=_('Bosh sahifada ajratib ko‘rsatish'))  # Flag
+    is_featured = models.BooleanField(default=True, verbose_name=_('Tavsiya etilgan'), help_text=_('Bosh sahifada ajratib ko‘rsatish'))  # Flag
 
     class Meta:
         verbose_name = _('Banner')

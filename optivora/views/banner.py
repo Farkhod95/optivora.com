@@ -39,7 +39,7 @@ class BannerViewList(ListCreateAPIView):
     filter_backends = (filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend)
     filterset_class = BannersFilter
     search_fields = ('title', 'description')
-    ordering = ['pk']
+    ordering = ['order_index']
     permission_classes = (AllowAny,)
     http_method_names = ['get']
 
@@ -53,7 +53,7 @@ class BannerView(ListCreateAPIView):
     filter_backends = (filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend)
     filterset_class = BannersFilter
     search_fields = ('title', 'description')
-    ordering = ['pk']
+    ordering = ['order_index']
 
     def get_queryset(self):
         return Banner.objects.all()

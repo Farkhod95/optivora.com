@@ -186,6 +186,7 @@ class TestimonialAdmin(admin.ModelAdmin):
 class BannerAdmin(admin.ModelAdmin):
     list_display = ('title', 'description', 'photo', 'is_featured')
     fields = (
-        'title', 'description', 'photo', 'is_featured',
+        'title', 'title_en', 'title_uz', 'title_ru', 'description', 'description_en', 'description_uz',
+        'description_ru', 'photo', 'is_featured',
     )
     search_fields = ('title', 'description')

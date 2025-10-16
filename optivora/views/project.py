@@ -9,7 +9,7 @@ from rest_framework.permissions import AllowAny
 
 from optivora.filterset import ProjectFilter
 from optivora.models import Project
-from optivora.serializers import ProjectSerializer
+from optivora.serializers import ProjectSerializer, ProjectListSerializer
 
 from restapp.pagination import ResultsSetPagination
 from restapp.utils.responses import nonContent
@@ -33,7 +33,7 @@ class ProjectFieldInfoView(APIView):
 
 
 class ProjectViewList(ListCreateAPIView):
-    serializer_class = ProjectSerializer
+    serializer_class = ProjectListSerializer
     pagination_class = ResultsSetPagination
     filter_backends = (filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend)
     filterset_class = ProjectFilter

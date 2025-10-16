@@ -35,9 +35,7 @@ class IndustryAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug', 'order_index')
     fields = (
         'name', 'name_en', 'name_uz', 'name_ru',
-        'slug',
-        'short_description', 'short_description_en', 'short_description_uz', 'short_description_ru',
-        'description', 'description_en', 'description_uz', 'description_ru',
+        'slug', 'description', 'description_en', 'description_uz', 'description_ru',
         'icon', 'order_index',
     )
     search_fields = ('name', 'slug', 'short_description', 'description')
@@ -60,9 +58,7 @@ class ServiceAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug', 'order_index')
     fields = (
         'name', 'name_en', 'name_uz', 'name_ru',
-        'slug',
-        'short_description', 'short_description_en', 'short_description_uz', 'short_description_ru',
-        'description', 'description_en', 'description_uz', 'description_ru',
+        'slug', 'description', 'description_en', 'description_uz', 'description_ru',
         'icon', 'industries', 'equipment_categories', 'order_index',
     )
     search_fields = ('name', 'slug', 'short_description', 'description')

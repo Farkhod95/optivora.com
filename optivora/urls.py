@@ -15,7 +15,7 @@ from optivora.views.news_post import NewsPostView, NewsPostDetailView, NewsPostF
 from optivora.views.partner import PartnerView, PartnerDetailView, PartnerFieldInfoView, PartnerViewList
 from optivora.views.project import ProjectView, ProjectDetailView, ProjectFieldInfoView, ProjectViewList
 from optivora.views.project_deliverable import ProjectDeliverableView, ProjectDeliverableDetailView, \
-    ProjectDeliverableFieldInfoView
+    ProjectDeliverableFieldInfoView, ProjectDeliverableViewList
 from optivora.views.project_image import ProjectImageView, ProjectImageDetailView, ProjectImageFieldInfoView, \
     ProjectImageViewList
 from optivora.views.service import ServiceView, ServiceDetailView, ServiceFieldInfoView, ServiceViewList
@@ -56,11 +56,13 @@ urlpatterns = [
     path('project/<int:pk>', ProjectDetailView.as_view(), name='project-detail'),
     path('project/fields/', ProjectFieldInfoView.as_view(), name='project-fields'),
     path('project/public', ProjectViewList.as_view(), name='project-public-info'),
+    path('project/<int:pk>/public', ProjectDetailView.as_view(), name='project-id-detail'),
 
     # ProjectDeliverable
     re_path(r'^project-deliverable$', ProjectDeliverableView.as_view(), name='project-deliverable-list'),
     path('project-deliverable/<int:pk>', ProjectDeliverableDetailView.as_view(), name='project-deliverable-detail'),
     path('project-deliverable/fields/', ProjectDeliverableFieldInfoView.as_view(), name='project-deliverable-fields'),
+    path('project-deliverable/public', ProjectDeliverableViewList.as_view(), name='project-deliverable-info'),
 
     # ProjectImage
     re_path(r'^project-image$', ProjectImageView.as_view(), name='project-image-list'),

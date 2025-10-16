@@ -82,7 +82,7 @@ class ProjectDetailView(RetrieveUpdateDestroyAPIView):
 
     def get(self, request, pk):
         instance = get_object_or_404(Project, id=pk)
-        serializer = ProjectSerializer(instance)
+        serializer = ProjectListSerializer(instance)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def put(self, request, pk):

@@ -35,7 +35,7 @@ class Industry(BaseModel):
     short_description = models.CharField(_('Qisqa tavsif'), max_length=255, null=True, blank=True, help_text=_('Sektor bo‘yicha qisqa bir jumla'))  # Kartochka uchun
     description = models.TextField(_('Tavsif'), null=True, blank=True, help_text=_('Sektor haqida batafsil tavsif (ixtiyoriy)'))  # SEO/Detail
     icon = models.ImageField(upload_to='industries/icons/%Y/%m/', null=True, blank=True, help_text=_('Sektor ikonkasi (ixtiyoriy)'))  # UI ikona
-    order_index = models.PositiveIntegerField(default=0, verbose_name=_('Tartib'), help_text=_('Chop etishda tartib (kichik son – oldinda)'))  # Sortlash
+    order_index = models.PositiveIntegerField(default=0, unique=True, verbose_name=_('Tartib'), help_text=_('Chop etishda tartib (kichik son – oldinda)'))  # Sortlash
 
     class Meta:
         verbose_name = _('Sektor')
@@ -50,7 +50,7 @@ class EquipmentCategory(BaseModel):
     name = models.CharField(_('Nomi'), max_length=120, null=True, blank=True, unique=True, help_text=_('Uskuna kategoriyasi nomi (masalan: Control & Automation)'))  # Unikal nom
     slug = models.SlugField(_('Slug'), max_length=140, unique=True, help_text=_('URL uchun unikal identifikator'))  # URL-friendly
     description = models.TextField(_('Tavsif'), null=True, blank=True, help_text=_('Kategoriyaga oid batafsil tavsif (ixtiyoriy)'))  # SEO/Detail
-    order_index = models.PositiveIntegerField(default=0, verbose_name=_('Tartib'), help_text=_('Chop etish tartibi'))  # Sortlash
+    order_index = models.PositiveIntegerField(default=0, unique=True, verbose_name=_('Tartib'), help_text=_('Chop etish tartibi'))  # Sortlash
 
     class Meta:
         verbose_name = _('Uskuna kategoriyasi')
@@ -69,7 +69,7 @@ class Service(BaseModel):
     icon = models.ImageField(upload_to='services/icons/%Y/%m/', null=True, blank=True, help_text=_('Xizmat ikonkasi (ixtiyoriy)'))  # UI ikona
     industries = models.ManyToManyField(Industry, related_name='services', blank=True, verbose_name=_('Sektorlar'), help_text=_('Xizmat qamrab oladigan sektorlar (ixtiyoriy)'))  # Aloqa: sektorlar
     equipment_categories = models.ManyToManyField(EquipmentCategory, related_name='services', blank=True, verbose_name=_('Uskuna kategoriyalari'), help_text=_('Xizmatga tegishli uskunalar toifalari (ixtiyoriy)'))  # Aloqa: uskunalar
-    order_index = models.PositiveIntegerField(default=0, verbose_name=_('Tartib'), help_text=_('Chop etish tartibi'))  # Sortlash
+    order_index = models.PositiveIntegerField(default=0, unique=True, verbose_name=_('Tartib'), help_text=_('Chop etish tartibi'))  # Sortlash
 
     class Meta:
         verbose_name = _('Xizmat')
@@ -95,7 +95,7 @@ class Partner(BaseModel):
     description = models.TextField(_('Qisqa tavsif'), null=True, blank=True, help_text=_('Hamkor haqida qisqa tavsif (ixtiyoriy)'))  # Katalog matni
     industries = models.ManyToManyField(Industry, related_name='partners', blank=True, verbose_name=_('Sektorlar'), help_text=_('Hamkor qamrab oladigan sektorlar (ixtiyoriy)'))  # Aloqa: sektorlar
     equipment_categories = models.ManyToManyField(EquipmentCategory, related_name='partners', blank=True, verbose_name=_('Uskuna kategoriyalari'), help_text=_('Hamkor taqdim etadigan uskunalar toifalari (ixtiyoriy)'))  # Aloqa: uskunalar
-    order_index = models.PositiveIntegerField(default=0, verbose_name=_('Tartib'), help_text=_('Chop etish tartibi'))  # Sortlash
+    order_index = models.PositiveIntegerField(default=0, unique=True, verbose_name=_('Tartib'), help_text=_('Chop etish tartibi'))  # Sortlash
 
     class Meta:
         verbose_name = _('Hamkor')
@@ -125,7 +125,7 @@ class Project(BaseModel):
     equipment_categories = models.ManyToManyField(EquipmentCategory, related_name='projects', blank=True, verbose_name=_('Uskuna kategoriyalari'), help_text=_('Loyihadagi uskunalar toifalari (ixtiyoriy)'))  # Aloqa: uskunalar
     partners = models.ManyToManyField(Partner, related_name='projects', blank=True, verbose_name=_('Hamkorlar'), help_text=_('Loyihada ishtirok etgan hamkorlar (ixtiyoriy)'))  # Aloqa: hamkor
     is_featured = models.BooleanField(default=False, verbose_name=_('Tavsiya etilgan'), null=True, blank=True, help_text=_('Bosh sahifada yoki ro‘yxat tepasida ko‘rsatish'))  # Flag
-    order_index = models.PositiveIntegerField(default=0, verbose_name=_('Tartib'), help_text=_('Chop etish tartibi'))  # Sortlash
+    order_index = models.PositiveIntegerField(default=0, unique=True, verbose_name=_('Tartib'), help_text=_('Chop etish tartibi'))  # Sortlash
 
     class Meta:
         verbose_name = _('Loyiha')
@@ -153,7 +153,7 @@ class ProjectImage(BaseModel):
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='images', verbose_name=_('Loyiha'), help_text=_('Rasm tegishli loyihasi'))  # FK: Project
     image = models.ImageField(upload_to='projects/gallery/%Y/%m/', null=True, blank=True, help_text=_('Loyiha galereyasi rasmi'))  # JPG/PNG
     caption = models.CharField(_('Sarlavha'), max_length=200, null=True, blank=True, help_text=_('Rasm izohi (ixtiyoriy)'))  # Caption
-    order_index = models.PositiveIntegerField(default=0, verbose_name=_('Tartib'), help_text=_('Galereyada ko‘rinish tartibi'))  # Tartib
+    order_index = models.PositiveIntegerField(default=0, unique=True, verbose_name=_('Tartib'), help_text=_('Galereyada ko‘rinish tartibi'))  # Tartib
 
     class Meta:
         verbose_name = _('Loyiha rasmi')
@@ -167,7 +167,7 @@ class StatItem(BaseModel):
     """‘By The Numbers’ bo‘limidagi statistik ko‘rsatkichlar (4 ta blok)."""
     label = models.CharField(_('Nomi'), max_length=200, null=True, blank=True, help_text=_('Masalan: Years of Equipment Supply Experience'))  # Ko‘rsatkich nomi
     value = models.CharField(_('Qiymat'), max_length=50, null=True, blank=True, help_text=_('Masalan: 10+, 25, 120+'))  # Son/formatlangan matn
-    order_index = models.PositiveIntegerField(default=0, verbose_name=_('Tartib'), help_text=_('Chop etish tartibi'))  # Sortlash
+    order_index = models.PositiveIntegerField(default=0, unique=True, verbose_name=_('Tartib'), help_text=_('Chop etish tartibi'))  # Sortlash
 
     class Meta:
         verbose_name = _('Statistika bandi')
@@ -181,7 +181,7 @@ class FAQ(BaseModel):
     """Tez-tez so‘raladigan savollar: Contact sahifasi ostida ko‘rsatiladi."""
     question = models.CharField(_('Savol'), max_length=255, null=True, blank=True, help_text=_('Ko‘p so‘raladigan savol matni'))  # Savol
     answer = models.TextField(_('Javob'), null=True, blank=True, help_text=_('Savolga javob matni'))  # Javob matni
-    order_index = models.PositiveIntegerField(default=0, verbose_name=_('Tartib'), help_text=_('Chop etish tartibi'))  # Sortlash
+    order_index = models.PositiveIntegerField(default=0, unique=True, verbose_name=_('Tartib'), help_text=_('Chop etish tartibi'))  # Sortlash
 
     class Meta:
         verbose_name = _('FAQ')

@@ -13,7 +13,8 @@ from optivora.views.industry import IndustryView, IndustryDetailView, IndustryFi
 from optivora.views.inquiry import InquiryView, InquiryDetailView, InquiryFieldInfoView, InquiryViewList
 from optivora.views.news_post import NewsPostView, NewsPostDetailView, NewsPostFieldInfoView
 from optivora.views.partner import PartnerView, PartnerDetailView, PartnerFieldInfoView, PartnerViewList
-from optivora.views.project import ProjectView, ProjectDetailView, ProjectFieldInfoView, ProjectViewList
+from optivora.views.project import ProjectView, ProjectDetailView, ProjectFieldInfoView, ProjectViewList, \
+    ProjectDetailPublicView
 from optivora.views.project_deliverable import ProjectDeliverableView, ProjectDeliverableDetailView, \
     ProjectDeliverableFieldInfoView, ProjectDeliverableViewList
 from optivora.views.project_image import ProjectImageView, ProjectImageDetailView, ProjectImageFieldInfoView, \
@@ -56,7 +57,7 @@ urlpatterns = [
     path('project/<int:pk>', ProjectDetailView.as_view(), name='project-detail'),
     path('project/fields/', ProjectFieldInfoView.as_view(), name='project-fields'),
     path('project/public', ProjectViewList.as_view(), name='project-public-info'),
-    path('project/<int:pk>/public', ProjectDetailView.as_view(), name='project-id-detail'),
+    path('project/<int:pk>/public', ProjectDetailPublicView.as_view(), name='project-id-detail'),
 
     # ProjectDeliverable
     re_path(r'^project-deliverable$', ProjectDeliverableView.as_view(), name='project-deliverable-list'),

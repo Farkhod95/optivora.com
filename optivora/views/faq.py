@@ -5,6 +5,7 @@ from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIV
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.permissions import AllowAny
 
 from optivora.filterset import FAQFilter
 from optivora.models import FAQ
@@ -29,6 +30,20 @@ class FAQFieldInfoView(APIView):
                 "choices": dict(field.choices) if field.choices else None
             })
         return Response(field_info)
+
+
+class FAQViewList(ListCreateAPIView):
+    serializer_class = FAQSerializer
+    pagination_class = ResultsSetPagination
+    filter_backends = (filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend)
+    filterset_class = FAQFilter
+    search_fields = ('question', 'answer')
+    ordering = ['pk']
+    permission_classes = (AllowAny,)
+    http_method_names = ['get']
+
+    def get_queryset(self):
+        return FAQ.objects.all()
 
 
 class FAQView(ListCreateAPIView):

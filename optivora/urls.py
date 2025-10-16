@@ -8,7 +8,7 @@ from optivora.views.downloadable_file import DownloadableFileView, DownloadableF
     DownloadableFileFieldInfoView, DownloadableFileViewList
 from optivora.views.equipment_category import EquipmentCategoryView, EquipmentCategoryDetailView, \
     EquipmentCategoryFieldInfoView, EquipmentCategoryViewList
-from optivora.views.faq import FAQView, FAQDetailView, FAQFieldInfoView
+from optivora.views.faq import FAQView, FAQDetailView, FAQFieldInfoView, FAQViewList
 from optivora.views.industry import IndustryView, IndustryDetailView, IndustryFieldInfoView, IndustryViewList
 from optivora.views.inquiry import InquiryView, InquiryDetailView, InquiryFieldInfoView, InquiryViewList
 from optivora.views.news_post import NewsPostView, NewsPostDetailView, NewsPostFieldInfoView
@@ -80,6 +80,7 @@ urlpatterns = [
     re_path(r'^faq$', FAQView.as_view(), name='faq-list'),
     path('faq/<int:pk>', FAQDetailView.as_view(), name='faq-detail'),
     path('faq/fields/', FAQFieldInfoView.as_view(), name='faq-fields'),
+    path('faq/public', FAQViewList.as_view(), name='faq-public-info'),
 
     # Inquiry
     re_path(r'^inquiry$', InquiryView.as_view(), name='inquiry-list'),

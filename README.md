@@ -47,3 +47,4 @@
     pip install -r requirements.txt
     python -m django --version   # 4.2.13 chiqishi kerak
 
+

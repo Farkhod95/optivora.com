@@ -3,6 +3,7 @@ from django.urls import re_path, path
 from optivora.views.banner import BannerView, BannerDetailView, BannerFieldInfoView, BannerViewList
 from optivora.views.company_profile import CompanyProfileView, CompanyProfileDetailView, CompanyProfileFieldInfoView, \
     CompanyProfileViewList
+from optivora.views.dashboard_stats import dashboard_stats
 from optivora.views.downloadable_file import DownloadableFileView, DownloadableFileDetailView, \
     DownloadableFileFieldInfoView, DownloadableFileViewList
 from optivora.views.equipment_category import EquipmentCategoryView, EquipmentCategoryDetailView, \
@@ -103,4 +104,6 @@ urlpatterns = [
     path('banner/<int:pk>', BannerDetailView.as_view(), name='banner-detail'),
     path('banner/fields/', BannerFieldInfoView.as_view(), name='banner-fields'),
     path('banner/public', BannerViewList.as_view(), name='banner-public-info'),
+
+    path('dashboard/stats/', dashboard_stats, name='dashboard-stats'),
 ]

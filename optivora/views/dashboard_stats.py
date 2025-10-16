@@ -76,14 +76,23 @@ def dashboard_stats(request):
             "by_role": users_by_role,
             "by_gender": gender_counts_map,  # {"male": n, "female": m, "unknown": k}
         },
-        "catalog": {
-            "industries": industries_total,
-            "services": services_total,
-            "equipment_categories": equipment_categories_total,
-            "partners": {
-                "total": partners_total,
-                "by_category": partners_by_category
-            }
+        # "catalog": {
+        #     "industries": industries_total,
+        #     "services": services_total,
+        #     "equipment_categories": equipment_categories_total,
+        #     "partners": {
+        #         "total": partners_total,
+        #         "by_category": partners_by_category
+        #     }
+        # },
+        "partners": {
+            "total": partners_total,
+        },
+        "services": {
+            "total": services_total,
+        },
+        "industries": {
+            "total": industries_total,
         },
         "projects": {
             "total": projects_total,

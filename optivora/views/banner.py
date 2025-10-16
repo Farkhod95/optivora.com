@@ -1,0 +1,95 @@
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import status, filters
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, get_object_or_404
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework.permissions import AllowAny
+
+from optivora.filterset import BannersFilter
+from optivora.models import Banner
+from optivora.serializers import BannerSerializer
+
+from restapp.pagination import ResultsSetPagination
+from restapp.utils.responses import nonContent
+
+
+class BannerFieldInfoView(APIView):
+    permission_classes = [IsAuthenticated,]
+
+    def get(self, request):
+        field_info = []
+
+        for field in Banner._meta.fields:
+            field_info.append({
+                "field_name": field.name,
+                "verbose_name": str(field.verbose_name),
+                "help_text": str(field.help_text) if field.help_text else "",
+                "type": field.get_internal_type(),
+                "max_length": getattr(field, 'max_length', None),
+                "choices": dict(field.choices) if field.choices else None
+            })
+
+        return Response(field_info)
+
+
+class BannerViewList(ListCreateAPIView):
+    serializer_class = BannerSerializer
+    pagination_class = ResultsSetPagination
+    filter_backends = (filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend)
+    filterset_class = BannersFilter
+    search_fields = ('title', 'description')
+    ordering = ['pk']
+    permission_classes = (AllowAny,)
+    http_method_names = ['get']
+
+    def get_queryset(self):
+        return Banner.objects.all()
+
+
+class BannerView(ListCreateAPIView):
+    serializer_class = BannerSerializer
+    pagination_class = ResultsSetPagination
+    filter_backends = (filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend)
+    filterset_class = BannersFilter
+    search_fields = ('title', 'description')
+    ordering = ['pk']
+
+    def get_queryset(self):
+        return Banner.objects.all()
+
+    def post(self, request):
+        serializer = BannerSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save(created_by=self.request.user)
+        return Response(serializer.data, status.HTTP_201_CREATED)
+
+
+class BannerDetailView(RetrieveUpdateDestroyAPIView):
+    serializer_class = BannerSerializer
+
+    def get_queryset(self):
+        return Banner.objects.all()
+
+    def perform_update(self, serializer):
+        serializer.save(updated_by=self.request.user)
+
+    def get(self, request, pk):
+        instance = get_object_or_404(Banner, id=pk)
+        serializer = BannerSerializer(instance)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def put(self, request, pk):
+        instance = get_object_or_404(Banner, id=pk)
+        serializer = self.serializer_class(instance, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save(updated_by=self.request.user)
+        return Response(serializer.data, status.HTTP_202_ACCEPTED)
+
+    def delete(self, request, pk):
+        instance = get_object_or_404(Banner, id=pk)
+        instance.delete()
+        return Response(nonContent(), status.HTTP_204_NO_CONTENT)
+
+
+

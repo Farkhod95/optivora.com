@@ -110,13 +110,13 @@ class Project(BaseModel):
     title = models.CharField(_('Loyiha nomi'), max_length=200, null=True, blank=True, help_text=_('Loyiha to‘liq nomi'))  # Karta sarlavhasi
     slug = models.SlugField(_('Slug'), max_length=220, unique=True, null=True, blank=True, help_text=_('URL uchun unikal identifikator'))  # URL-friendly
     country = models.ForeignKey(Country, null=True, blank=True, on_delete=models.CASCADE, related_name='project_country',
-                               verbose_name=_('Loyiha'), help_text=_('Qaysi loyihaga tegishli deliverable'))
+                               verbose_name=_('Mamlakat'), help_text=_('Qaysi loyihaga tegishli deliverable'))
     region = models.ForeignKey(Region, null=True, blank=True, on_delete=models.CASCADE, related_name='project_region',
-                                verbose_name=_('Loyiha'), help_text=_('Qaysi loyihaga tegishli deliverable'))
+                                verbose_name=_('Viloyat'), help_text=_('Qaysi loyihaga tegishli deliverable'))
     # location_city = models.CharField(_('Shahar'), max_length=120, null=True, blank=True, help_text=_('Loyiha shahri (ixtiyoriy)'))  # Masalan: Tashkent
     # location_region = models.CharField(_('Viloyat/Region'), max_length=120, null=True, blank=True, help_text=_('Loyiha joylashuvi (ixtiyoriy)'))  # Masalan: Tashkent Region
     district = models.ForeignKey(District, null=True, blank=True, on_delete=models.CASCADE, related_name='project_district',
-                               verbose_name=_('Loyiha'), help_text=_('Qaysi loyihaga tegishli deliverable'))
+                               verbose_name=_('Tuman'), help_text=_('Qaysi loyihaga tegishli deliverable'))
     year = models.PositiveSmallIntegerField(_('Yil'), validators=[MinValueValidator(1990), MaxValueValidator(2100)], null=True, blank=True, help_text=_('Loyiha yilini kiriting (masalan: 2025)'))  # Filtr/ko‘rsatish uchun
     scope = models.CharField(_('Qamrov (scope)'), max_length=255, null=True, blank=True, help_text=_('Masalan: Supply of advanced power electronics and control systems'))  # Qisqacha scope
     summary = models.TextField(_('Qisqa izoh'), null=True, blank=True, help_text=_('Loyiha haqida qisqa sharh (ixtiyoriy)'))  # Batafsil
@@ -300,3 +300,17 @@ class Testimonial(BaseModel):
 
     def __str__(self):
         return f"{self.author_name} — {self.company or ''}".strip()
+
+class Banner(BaseModel):
+    """Banner: homepage slider sahifa uchun."""
+    title = models.CharField(_('Muallif'), max_length=160, help_text=_('Fikr muallifi to‘liq ismi'))  # Muallif
+    description = models.TextField(_('Izoh'), help_text=_('Testimonial matni'))  # Iqtibos
+    photo = models.ImageField(upload_to='banner/%Y/%m/', null=True, blank=True, help_text=_('Muallif surati (ixtiyoriy)'))  # Avatar
+    is_featured = models.BooleanField(default=False, verbose_name=_('Tavsiya etilgan'), help_text=_('Bosh sahifada ajratib ko‘rsatish'))  # Flag
+
+    class Meta:
+        verbose_name = _('Banner')
+        verbose_name_plural = _('Banneres')
+
+    def __str__(self):
+        return f"{self.title}".strip()

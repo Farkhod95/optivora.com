@@ -1,5 +1,6 @@
 from django.urls import re_path, path
 
+from optivora.views.banner import BannerView, BannerDetailView, BannerFieldInfoView, BannerViewList
 from optivora.views.company_profile import CompanyProfileView, CompanyProfileDetailView, CompanyProfileFieldInfoView, \
     CompanyProfileViewList
 from optivora.views.downloadable_file import DownloadableFileView, DownloadableFileDetailView, \
@@ -97,4 +98,9 @@ urlpatterns = [
     re_path(r'^testimonial$', TestimonialView.as_view(), name='testimonial-list'),
     path('testimonial/<int:pk>', TestimonialDetailView.as_view(), name='testimonial-detail'),
     path('testimonial/fields/', TestimonialFieldInfoView.as_view(), name='testimonial-fields'),
+
+    re_path(r'^banner$', BannerView.as_view(), name='banner-list'),
+    path('banner/<int:pk>', BannerDetailView.as_view(), name='banner-detail'),
+    path('banner/fields/', BannerFieldInfoView.as_view(), name='banner-fields'),
+    path('banner/public', BannerViewList.as_view(), name='banner-public-info'),
 ]

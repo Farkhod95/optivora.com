@@ -14,7 +14,7 @@ from .models import (
     Inquiry,
     DownloadableFile,
     NewsPost,
-    Testimonial,
+    Testimonial, Banner,
 )
 
 
@@ -180,3 +180,12 @@ class TestimonialAdmin(admin.ModelAdmin):
         'photo', 'is_featured',
     )
     search_fields = ('author_name', 'author_role', 'company', 'quote')
+
+
+@admin.register(Banner)
+class BannerAdmin(admin.ModelAdmin):
+    list_display = ('title', 'description', 'photo', 'is_featured')
+    fields = (
+        'title', 'description', 'photo', 'is_featured',
+    )
+    search_fields = ('title', 'description')

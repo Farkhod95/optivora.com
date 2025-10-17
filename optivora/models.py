@@ -330,8 +330,8 @@ class Banner(BaseModel):
 class OurWork(BaseModel):
     """Bizning ishlarimiz..."""
     class TYPE(models.TextChoices):
-        TYPE1 = 'technical_solution ', _('Technical Solution')
-        TYPE2 = 'why_choose ', _('Why Choose Optivora')
+        TYPE1 = 'technical_solution', _('Technical Solution')
+        TYPE2 = 'why_choose', _('Why Choose Optivora')
         TYPE3 = 'what_we_do', _('What We Do')
         TYPE4 = 'our_suppliers', _('Our Suppliers')
         TYPE5 = 'industries_we_serve', _('Industries We Serve')

@@ -94,3 +94,20 @@ class NewsPostDetailView(RetrieveUpdateDestroyAPIView):
         instance = get_object_or_404(NewsPost, id=pk)
         instance.delete()
         return Response(nonContent(), status.HTTP_204_NO_CONTENT)
+
+
+class NewsPostDetailPublicView(RetrieveUpdateDestroyAPIView):
+    serializer_class = NewsPostSerializer
+    permission_classes = (AllowAny,)
+    http_method_names = ['get']
+
+    def get_queryset(self):
+        return NewsPost.objects.all()
+
+    def perform_update(self, serializer):
+        serializer.save(updated_by=self.request.user)
+
+    def get(self, request, pk):
+        instance = get_object_or_404(NewsPost, id=pk)
+        serializer = NewsPostSerializer(instance)
+        return Response(serializer.data, status=status.HTTP_200_OK)

@@ -330,9 +330,10 @@ class Banner(BaseModel):
 class OurWork(BaseModel):
     """Bizning ishlarimiz..."""
     class TYPE(models.TextChoices):
-        TYPE1 = 'what_we_do', _('What We Do')
-        TYPE2 = 'our_suppliers', _('Our Suppliers')
-        TYPE3 = 'industries_we_serve', _('Industries We Serve')
+        TYPE1 = 'why_choose ', _('Why Choose Optivora')
+        TYPE2 = 'what_we_do', _('What We Do')
+        TYPE3 = 'our_suppliers', _('Our Suppliers')
+        TYPE4 = 'industries_we_serve', _('Industries We Serve')
 
     title = models.CharField(_('Xizmat nomi'), null=True, blank=True, max_length=150, unique=True, help_text=_('Xizmatning to‘liq nomi (masalan: Equipment Supply & Procurement)'))  # Unikal nom
     description = models.TextField(_('Batafsil tavsif'), null=True, blank=True, help_text=_('Xizmat tafsilotlari (ixtiyoriy)'))  # Batafsil matn

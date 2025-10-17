@@ -68,7 +68,7 @@ class ServiceAdmin(admin.ModelAdmin):
 class PartnerAdmin(admin.ModelAdmin):
     list_display = ('name', 'category', 'website', 'order_index')
     fields = (
-        'name', 'name_en', 'name_uz', 'name_ru',
+        'name', 'name_en', 'name_uz', 'name_ru', 'country',
         'category', 'logo', 'website',
         'description', 'description_en', 'description_uz', 'description_ru',
         'industries', 'equipment_categories', 'order_index',

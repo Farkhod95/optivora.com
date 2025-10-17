@@ -98,6 +98,8 @@ class Partner(BaseModel):
         ELECTRICAL_POWER = 'electrical_power', _('Electrical & Power Components')
 
     name = models.CharField(_('Nomi'), max_length=160, null=True, blank=True, unique=True, help_text=_('Hamkor/manufacturer nomi'))  # Masalan: Statron
+    country = models.ForeignKey(Country, null=True, blank=True, on_delete=models.CASCADE, related_name='partner_country',
+                                verbose_name=_('Mamlakat'), help_text=_('Qaysi loyihaga tegishli deliverable'))
     category = models.CharField(_('Kategoriya'), max_length=40, null=True, blank=True, choices=CATEGORY.choices, help_text=_('Hamkor toifasi'))  # Tanlov: bo‘lim
     logo = models.ImageField(upload_to='partners/logos/%Y/%m/', null=True, blank=True, help_text=_('Hamkor logotipi (ixtiyoriy)'))  # PNG/JPG
     website = models.URLField(_('Veb-sayt'), null=True, blank=True, help_text=_('Rasmiy veb-sayt manzili (ixtiyoriy)'))  # https://...

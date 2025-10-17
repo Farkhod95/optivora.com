@@ -145,10 +145,11 @@ class PartnerSerializer(BaseLocaleSerializer):
         read_only_fields = ('id', 'created_time', 'updated_time', 'created_by', 'updated_by')
 
 class PartnerListPublicSerializer(BaseLocaleSerializer):
+    country_detail = CountryListSerializer(source="country", read_only=True)
 
     class Meta:
         model = Partner
-        fields =( 'name', 'category', 'website')
+        fields =( 'name', 'category', 'website', 'country', 'country_detail')
 
 
 class ProjectSerializer(BaseLocaleSerializer):

@@ -338,7 +338,7 @@ class OurWork(BaseModel):
     title = models.CharField(_('Xizmat nomi'), null=True, blank=True, max_length=150, unique=True, help_text=_('Xizmatning to‘liq nomi (masalan: Equipment Supply & Procurement)'))  # Unikal nom
     description = models.TextField(_('Batafsil tavsif'), null=True, blank=True, help_text=_('Xizmat tafsilotlari (ixtiyoriy)'))  # Batafsil matn
     icon = models.ImageField(upload_to='ourwork/icons/%Y/%m/', null=True, blank=True, help_text=_('Xizmat ikonkasi (ixtiyoriy)'))  # UI ikona
-    type = models.CharField(_('Holat'), max_length=12, choices=TYPE.choices, null=True, blank=True, help_text=_('Nashr holati'))
+    type = models.CharField(_('Holat'), max_length=50, choices=TYPE.choices, null=True, blank=True, help_text=_('Nashr holati'))
     order_index = models.PositiveIntegerField( verbose_name=_('Tartib'), help_text=_('Chop etish tartibi'))  # Sortlash
 
     class Meta:

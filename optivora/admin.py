@@ -74,7 +74,7 @@ class PartnerAdmin(admin.ModelAdmin):
         'industries', 'equipment_categories', 'order_index',
     )
     search_fields = ('name', 'website', 'description')
-    autocomplete_fields = ('country')
+    autocomplete_fields = ('country',)
 
 
 @admin.register(Project)

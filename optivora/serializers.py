@@ -121,6 +121,9 @@ class ServiceSerializer(BaseLocaleSerializer):
     equipment_categories = serializers.PrimaryKeyRelatedField(
         queryset=EquipmentCategory.objects.all(), many=True, required=False
     )
+    equipment_categories_detail = EquipmentCategoryPublicListSerializer(source="equipment_categories", many=True,
+                                                                        read_only=True)
+    industries_detail = IndustryListPublicSerializer(source="industries", many=True, read_only=True)
 
     class Meta:
         model = Service

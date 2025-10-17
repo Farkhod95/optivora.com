@@ -68,6 +68,7 @@ class PartnerFilter(FilterSet):
             'industries': ['exact'],
             'equipment_categories': ['exact'],
             'order_index': ['exact'],
+            'country': ['exact'],
         }
 
 

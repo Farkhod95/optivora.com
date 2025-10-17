@@ -22,6 +22,7 @@ from optivora.views.project_image import ProjectImageView, ProjectImageDetailVie
 from optivora.views.service import ServiceView, ServiceDetailView, ServiceFieldInfoView, ServiceViewList
 from optivora.views.stat_item import StatItemView, StatItemDetailView, StatItemFieldInfoView
 from optivora.views.testimonial import TestimonialView, TestimonialDetailView, TestimonialFieldInfoView
+from optivora.views.what_we_do import WhatWeDoView, WhatWeDoDetailView, WhatWeDoFieldInfoView, WhatWeDoViewList
 
 urlpatterns = [
     re_path(r'^company-profile$', CompanyProfileView.as_view(), name='company-profile-view'),
@@ -110,4 +111,9 @@ urlpatterns = [
     path('banner/public', BannerViewList.as_view(), name='banner-public-info'),
 
     path('dashboard/stats/', dashboard_stats, name='dashboard-stats'),
+
+    re_path(r'^what-we-do$', WhatWeDoView.as_view(), name='what-we-do-list'),
+    path('what-we-do/<int:pk>', WhatWeDoDetailView.as_view(), name='what-we-do-detail'),
+    path('what-we-do/fields/', WhatWeDoFieldInfoView.as_view(), name='what-we-do-fields'),
+    path('what-we-do/public', WhatWeDoViewList.as_view(), name='what-we-do-public-info'),
 ]

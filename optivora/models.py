@@ -19,6 +19,15 @@ class CompanyProfile(BaseModel):
                             help_text=_('Kompaniya sarlavhasi'))  # Masalan: Optivora
     description = models.TextField(_('Tavsif'), null=True, blank=True,
                                    help_text=_('Kompaniya haqida batafsil tavsif (ixtiyoriy)'))  # SEO/Detail
+    file = models.FileField(upload_to='company/%Y/%m/', null=True, validators=[FileExtensionValidator(allowed_extensions=['pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx'])], help_text=_('Yuklanadigan fayl'))  # Fayl kontenti
+    years_experience = models.CharField(_('Yillik tajriba'), max_length=64, null=True, blank=True,
+                             help_text=_('Yillik tajriba'))  # +998...
+    equipment_categories = models.CharField(_('Uskunalar toifalari'), max_length=64, null=True, blank=True,
+                             help_text=_('Uskunalar toifalari'))  # +998...
+    projects_supported = models.CharField(_('Qo\'llab-quvvatlanadigan loyihalar'), max_length=64, null=True, blank=True,
+                             help_text=_('Qo\'llab-quvvatlanadigan loyihalar'))  # +998...
+    international_partners = models.CharField(_('Xalqaro hamkorlar'), max_length=64, null=True, blank=True,
+                             help_text=_('Xalqaro hamkorlar'))  # +998...
 
     class Meta:
         verbose_name = _('Kompaniya profili')
@@ -316,3 +325,19 @@ class Banner(BaseModel):
 
     def __str__(self):
         return f"{self.title}".strip()
+
+
+class WhatWeDo(BaseModel):
+    """Biz nima qilamiz..."""
+    title = models.CharField(_('Xizmat nomi'), null=True, blank=True, max_length=150, unique=True, help_text=_('Xizmatning to‘liq nomi (masalan: Equipment Supply & Procurement)'))  # Unikal nom
+    description = models.TextField(_('Batafsil tavsif'), null=True, blank=True, help_text=_('Xizmat tafsilotlari (ixtiyoriy)'))  # Batafsil matn
+    icon = models.ImageField(upload_to='services/icons/%Y/%m/', null=True, blank=True, help_text=_('Xizmat ikonkasi (ixtiyoriy)'))  # UI ikona
+    order_index = models.PositiveIntegerField(unique=True, verbose_name=_('Tartib'),
+                                              help_text=_('Chop etish tartibi'))  # Sortlash
+
+    class Meta:
+        verbose_name = _('What We Do')
+        verbose_name_plural = _('What We Does')
+
+    def __str__(self):
+        return self.title

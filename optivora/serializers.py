@@ -3,7 +3,7 @@ from rest_framework import serializers
 from directory.serializers import RegionListPublicSerializer, DistrictListPublicSerializer, CountryListSerializer
 from .models import (CompanyProfile, Industry, EquipmentCategory, Service, Partner, Project,
                      ProjectDeliverable, ProjectImage, StatItem, FAQ,
-                     Inquiry, DownloadableFile, NewsPost, Testimonial, Industry, Banner
+                     Inquiry, DownloadableFile, NewsPost, Testimonial, Industry, Banner, WhatWeDo
                      )
 
 
@@ -65,7 +65,8 @@ class CompanyProfileSerializer(LocaleSerializer):
         model = CompanyProfile
         fields = (
         'id', 'name', 'name_en', 'name_uz', 'name_ru', 'logo', 'email', 'phone', 'address', 'business_hours', 'title',
-        'title_en', 'title_uz', 'title_ru', 'description', 'description_en', 'description_uz', 'description_ru')
+        'title_en', 'title_uz', 'title_ru', 'description', 'description_en', 'description_uz', 'description_ru', 'file',
+        'years_experience', 'equipment_categories', 'projects_supported', 'international_partners',)
         extra_kwargs = {
             'name_en': {"required": True},
             'name_uz': {"required": True},
@@ -78,7 +79,8 @@ class CompanyProfileListSerializer(LocaleSerializer):
         model = CompanyProfile
         fields = (
         'id', 'name', 'name_en', 'name_uz', 'name_ru', 'logo', 'email', 'phone', 'address', 'business_hours', 'title',
-        'title_en', 'title_uz', 'titleru', 'description', 'description_en', 'description_uz', 'description_ru')
+        'title_en', 'title_uz', 'titleru', 'description', 'description_en', 'description_uz', 'description_ru', 'file',
+        'years_experience', 'equipment_categories', 'projects_supported', 'international_partners',)
 
 
 class IndustrySerializer(LocaleSerializer):
@@ -251,5 +253,12 @@ class TestimonialSerializer(BaseLocaleSerializer):
 class BannerSerializer(BaseLocaleSerializer):
     class Meta:
         model = Banner
+        fields = '__all__'
+        read_only_fields = ('id', 'created_time', 'updated_time', 'created_by', 'updated_by')
+
+
+class WhatWeDoSerializer(BaseLocaleSerializer):
+    class Meta:
+        model = WhatWeDo
         fields = '__all__'
         read_only_fields = ('id', 'created_time', 'updated_time', 'created_by', 'updated_by')

@@ -2,7 +2,7 @@ from django_filters.rest_framework import FilterSet
 from django_filters import rest_framework as filters
 
 from optivora.models import CompanyProfile, Industry, EquipmentCategory, Service, Partner, Project, ProjectDeliverable, \
-    ProjectImage, StatItem, FAQ, Inquiry, DownloadableFile, NewsPost, Testimonial, Banner
+    ProjectImage, StatItem, FAQ, Inquiry, DownloadableFile, NewsPost, Testimonial, Banner, WhatWeDo
 
 
 class CompanyProfilesFilter(FilterSet):
@@ -203,6 +203,14 @@ class TestimonialFilter(FilterSet):
 class BannersFilter(FilterSet):
     class Meta:
         model = Banner
+        fields = {
+            'title': ['exact'],
+        }
+
+
+class WhatWeDoFilter(FilterSet):
+    class Meta:
+        model = WhatWeDo
         fields = {
             'title': ['exact'],
         }

@@ -30,8 +30,8 @@ class CompanyProfile(BaseModel):
                              help_text=_('Xalqaro hamkorlar'))  # +998...
 
     class Meta:
-        verbose_name = _('Kompaniya profili')
-        verbose_name_plural = _('Kompaniya profili')
+        verbose_name = _('Company Profile')
+        verbose_name_plural = _('Company Profiles')
 
     def __str__(self):
         return self.name
@@ -47,8 +47,8 @@ class Industry(BaseModel):
     order_index = models.PositiveIntegerField(unique=True, verbose_name=_('Tartib'), help_text=_('Chop etishda tartib (kichik son – oldinda)'))  # Sortlash
 
     class Meta:
-        verbose_name = _('Sektor')
-        verbose_name_plural = _('Sektorlar')
+        verbose_name = _('Industries We Serve')
+        verbose_name_plural = _('Industries We Serve')
 
     def __str__(self):
         return self.name
@@ -62,8 +62,8 @@ class EquipmentCategory(BaseModel):
     order_index = models.PositiveIntegerField(unique=True, verbose_name=_('Tartib'), help_text=_('Chop etish tartibi'))  # Sortlash
 
     class Meta:
-        verbose_name = _('Uskuna kategoriyasi')
-        verbose_name_plural = _('Uskuna kategoriyalari')
+        verbose_name = _('Equipment Category')
+        verbose_name_plural = _('Equipment Category')
 
     def __str__(self):
         return self.name
@@ -81,8 +81,8 @@ class Service(BaseModel):
     order_index = models.PositiveIntegerField(unique=True, verbose_name=_('Tartib'), help_text=_('Chop etish tartibi'))  # Sortlash
 
     class Meta:
-        verbose_name = _('Xizmat')
-        verbose_name_plural = _('Xizmatlar')
+        verbose_name = _('Solution & Service')
+        verbose_name_plural = _('Solutions & Services')
 
     def __str__(self):
         return self.name
@@ -107,8 +107,8 @@ class Partner(BaseModel):
     order_index = models.PositiveIntegerField(unique=True, verbose_name=_('Tartib'), help_text=_('Chop etish tartibi'))  # Sortlash
 
     class Meta:
-        verbose_name = _('Hamkor')
-        verbose_name_plural = _('Hamkorlar')
+        verbose_name = _('Partner & Manufacturer')
+        verbose_name_plural = _('Partners & Manufacturers')
 
     def __str__(self):
         return self.name
@@ -137,8 +137,8 @@ class Project(BaseModel):
     order_index = models.PositiveIntegerField(unique=True, verbose_name=_('Tartib'), help_text=_('Chop etish tartibi'))  # Sortlash
 
     class Meta:
-        verbose_name = _('Loyiha')
-        verbose_name_plural = _('Loyihalar')
+        verbose_name = _('Project')
+        verbose_name_plural = _('Projects')
 
     def __str__(self):
         return f"{self.title} ({self.year})"
@@ -150,8 +150,8 @@ class ProjectDeliverable(BaseModel):
     name = models.CharField(_('Yetkazib beriladigan pozitsiya'), max_length=200, null=True, blank=True, help_text=_('Deliverable nomi (masalan: High-capacity inverter systems)'))  # Matn elementi
 
     class Meta:
-        verbose_name = _('Loyiha deliverabli')
-        verbose_name_plural = _('Loyiha deliverabllari')
+        verbose_name = _('Project Deliverable')
+        verbose_name_plural = _('Project Deliverables')
 
     def __str__(self):
         return self.name
@@ -165,8 +165,8 @@ class ProjectImage(BaseModel):
     order_index = models.PositiveIntegerField( unique=True, verbose_name=_('Tartib'), help_text=_('Galereyada ko‘rinish tartibi'))  # Tartib
 
     class Meta:
-        verbose_name = _('Loyiha rasmi')
-        verbose_name_plural = _('Loyiha rasmlari')
+        verbose_name = _('Project Image')
+        verbose_name_plural = _('Project Images')
 
     def __str__(self):
         return f"{self.project.title} - {self.id}"
@@ -179,8 +179,8 @@ class StatItem(BaseModel):
     order_index = models.PositiveIntegerField( unique=True, verbose_name=_('Tartib'), help_text=_('Chop etish tartibi'))  # Sortlash
 
     class Meta:
-        verbose_name = _('Statistika bandi')
-        verbose_name_plural = _('Statistika bandlari')
+        verbose_name = _('Stat Item')
+        verbose_name_plural = _('Stat Items')
 
     def __str__(self):
         return f"{self.label}: {self.value}"
@@ -236,8 +236,8 @@ class Inquiry(BaseModel):
     user_agent = models.TextField(_('User-Agent'), null=True, blank=True, help_text=_('Brauzer identifikatori (ixtiyoriy)'))  # Audit
 
     class Meta:
-        verbose_name = _('Murojaat')
-        verbose_name_plural = _('Murojaatlar')
+        verbose_name = _('Inquiry')
+        verbose_name_plural = _('Inquiries')
 
     def __str__(self):
         return f"{self.full_name} — {self.get_inquiry_type_display()}"
@@ -259,8 +259,8 @@ class DownloadableFile(BaseModel):
     is_public = models.BooleanField(default=True, verbose_name=_('Ommaviy'), help_text=_('Hamma uchun ko‘rinadimi'))  # Public flag
 
     class Meta:
-        verbose_name = _('Yuklab olinadigan fayl')
-        verbose_name_plural = _('Yuklab olinadigan fayllar')
+        verbose_name = _('Downloadable File')
+        verbose_name_plural = _('Downloadable Files')
 
     def __str__(self):
         return self.title
@@ -287,8 +287,8 @@ class NewsPost(BaseModel):
     published_at = models.DateTimeField(_('E’lon vaqti'), null=True, blank=True, help_text=_('Nashr qilingan sana-vaqt (ixtiyoriy)'))  # Publish time
 
     class Meta:
-        verbose_name = _('Yangilik')
-        verbose_name_plural = _('Yangiliklar')
+        verbose_name = _('News Post')
+        verbose_name_plural = _('News Posts')
 
     def __str__(self):
         return self.title

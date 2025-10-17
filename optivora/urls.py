@@ -11,7 +11,7 @@ from optivora.views.equipment_category import EquipmentCategoryView, EquipmentCa
 from optivora.views.faq import FAQView, FAQDetailView, FAQFieldInfoView, FAQViewList
 from optivora.views.industry import IndustryView, IndustryDetailView, IndustryFieldInfoView, IndustryViewList
 from optivora.views.inquiry import InquiryView, InquiryDetailView, InquiryFieldInfoView, InquiryViewList
-from optivora.views.news_post import NewsPostView, NewsPostDetailView, NewsPostFieldInfoView
+from optivora.views.news_post import NewsPostView, NewsPostDetailView, NewsPostFieldInfoView, NewsPostViewList
 from optivora.views.partner import PartnerView, PartnerDetailView, PartnerFieldInfoView, PartnerViewList
 from optivora.views.project import ProjectView, ProjectDetailView, ProjectFieldInfoView, ProjectViewList, \
     ProjectDetailPublicView
@@ -99,6 +99,7 @@ urlpatterns = [
     re_path(r'^news-post$', NewsPostView.as_view(), name='news-post-list'),
     path('news-post/<int:pk>', NewsPostDetailView.as_view(), name='news-post-detail'),
     path('news-post/fields/', NewsPostFieldInfoView.as_view(), name='news-post-fields'),
+    path('news-post/public', NewsPostViewList.as_view(), name='news-post-public-info'),
 
     # Testimonial
     re_path(r'^testimonial$', TestimonialView.as_view(), name='testimonial-list'),

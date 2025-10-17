@@ -1,4 +1,4 @@
-# views/WhatWeDo.py
+# views/OurWork.py
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import status, filters
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, get_object_or_404
@@ -7,20 +7,20 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
 
-from optivora.filterset import WhatWeDoFilter
-from optivora.models import WhatWeDo
-from optivora.serializers import WhatWeDoSerializer
+from optivora.filterset import OurWorkFilter
+from optivora.models import OurWork
+from optivora.serializers import OurWorkSerializer
 
 from restapp.pagination import ResultsSetPagination
 from restapp.utils.responses import nonContent
 
 
-class WhatWeDoFieldInfoView(APIView):
+class OurWorkFieldInfoView(APIView):
     permission_classes = [IsAuthenticated,]
 
     def get(self, request):
         field_info = []
-        for field in WhatWeDo._meta.fields:
+        for field in OurWork._meta.fields:
             field_info.append({
                 "field_name": field.name,
                 "verbose_name": str(field.verbose_name),
@@ -32,62 +32,62 @@ class WhatWeDoFieldInfoView(APIView):
         return Response(field_info)
 
 
-class WhatWeDoViewList(ListCreateAPIView):
-    serializer_class = WhatWeDoSerializer
+class OurWorkViewList(ListCreateAPIView):
+    serializer_class = OurWorkSerializer
     pagination_class = ResultsSetPagination
     filter_backends = (filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend)
-    filterset_class = WhatWeDoFilter
+    filterset_class = OurWorkFilter
     search_fields = 'title', 'description'
     ordering = ['pk']
     permission_classes = (AllowAny,)
     http_method_names = ['get']
 
     def get_queryset(self):
-        return WhatWeDo.objects.all()
+        return OurWork.objects.all()
 
 
-class WhatWeDoView(ListCreateAPIView):
-    serializer_class = WhatWeDoSerializer
+class OurWorkView(ListCreateAPIView):
+    serializer_class = OurWorkSerializer
     pagination_class = ResultsSetPagination
     filter_backends = (filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend)
-    filterset_class = WhatWeDoFilter
+    filterset_class = OurWorkFilter
     search_fields = (
         'title', 'description'
     )
     ordering = ['order_index']
 
     def get_queryset(self):
-        return WhatWeDo.objects.all()
+        return OurWork.objects.all()
 
     def post(self, request):
-        serializer = WhatWeDoSerializer(data=request.data)
+        serializer = OurWorkSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save(created_by=self.request.user)
         return Response(serializer.data, status.HTTP_201_CREATED)
 
 
-class WhatWeDoDetailView(RetrieveUpdateDestroyAPIView):
-    serializer_class = WhatWeDoSerializer
+class OurWorkDetailView(RetrieveUpdateDestroyAPIView):
+    serializer_class = OurWorkSerializer
 
     def get_queryset(self):
-        return WhatWeDo.objects.all()
+        return OurWork.objects.all()
 
     def perform_update(self, serializer):
         serializer.save(updated_by=self.request.user)
 
     def get(self, request, pk):
-        instance = get_object_or_404(WhatWeDo, id=pk)
-        serializer = WhatWeDoSerializer(instance)
+        instance = get_object_or_404(OurWork, id=pk)
+        serializer = OurWorkSerializer(instance)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def put(self, request, pk):
-        instance = get_object_or_404(WhatWeDo, id=pk)
+        instance = get_object_or_404(OurWork, id=pk)
         serializer = self.serializer_class(instance, data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save(updated_by=self.request.user)
         return Response(serializer.data, status.HTTP_202_ACCEPTED)
 
     def delete(self, request, pk):
-        instance = get_object_or_404(WhatWeDo, id=pk)
+        instance = get_object_or_404(OurWork, id=pk)
         instance.delete()
         return Response(nonContent(), status.HTTP_204_NO_CONTENT)

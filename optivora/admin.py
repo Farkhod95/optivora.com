@@ -14,7 +14,7 @@ from .models import (
     Inquiry,
     DownloadableFile,
     NewsPost,
-    Testimonial, Banner,
+    Testimonial, Banner, OurWork,
 )
 
 
@@ -188,5 +188,16 @@ class BannerAdmin(admin.ModelAdmin):
     fields = (
         'order_index', 'title', 'title_en', 'title_uz', 'title_ru', 'description', 'description_en', 'description_uz',
         'description_ru', 'photo', 'is_featured',
+    )
+    search_fields = ('title', 'description')
+
+
+
+@admin.register(OurWork)
+class OurWorkAdmin(admin.ModelAdmin):
+    list_display = ('title', 'type', 'description', 'order_index')
+    fields = (
+        'order_index', 'title', 'title_en', 'title_uz', 'title_ru', 'description', 'description_en', 'description_uz',
+        'description_ru', 'icon', 'type', 'order_index'
     )
     search_fields = ('title', 'description')

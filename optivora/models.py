@@ -327,17 +327,22 @@ class Banner(BaseModel):
         return f"{self.title}".strip()
 
 
-class WhatWeDo(BaseModel):
-    """Biz nima qilamiz..."""
+class OurWork(BaseModel):
+    """Bizning ishlarimiz..."""
+    class TYPE(models.TextChoices):
+        TYPE1 = 'what_we_do', _('What We Do')
+        TYPE2 = 'our_suppliers', _('Our Suppliers')
+        TYPE3 = 'industries_we_serve', _('Industries We Serve')
+
     title = models.CharField(_('Xizmat nomi'), null=True, blank=True, max_length=150, unique=True, help_text=_('Xizmatning to‘liq nomi (masalan: Equipment Supply & Procurement)'))  # Unikal nom
     description = models.TextField(_('Batafsil tavsif'), null=True, blank=True, help_text=_('Xizmat tafsilotlari (ixtiyoriy)'))  # Batafsil matn
-    icon = models.ImageField(upload_to='services/icons/%Y/%m/', null=True, blank=True, help_text=_('Xizmat ikonkasi (ixtiyoriy)'))  # UI ikona
-    order_index = models.PositiveIntegerField(unique=True, verbose_name=_('Tartib'),
-                                              help_text=_('Chop etish tartibi'))  # Sortlash
+    icon = models.ImageField(upload_to='ourwork/icons/%Y/%m/', null=True, blank=True, help_text=_('Xizmat ikonkasi (ixtiyoriy)'))  # UI ikona
+    type = models.CharField(_('Holat'), max_length=12, choices=TYPE.choices, null=True, blank=True, help_text=_('Nashr holati'))
+    order_index = models.PositiveIntegerField( verbose_name=_('Tartib'), help_text=_('Chop etish tartibi'))  # Sortlash
 
     class Meta:
-        verbose_name = _('What We Do')
-        verbose_name_plural = _('What We Does')
+        verbose_name = _('Our Work')
+        verbose_name_plural = _('Our Works')
 
     def __str__(self):
         return self.title

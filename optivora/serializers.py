@@ -3,7 +3,7 @@ from rest_framework import serializers
 from directory.serializers import RegionListPublicSerializer, DistrictListPublicSerializer, CountryListSerializer
 from .models import (CompanyProfile, Industry, EquipmentCategory, Service, Partner, Project,
                      ProjectDeliverable, ProjectImage, StatItem, FAQ,
-                     Inquiry, DownloadableFile, NewsPost, Testimonial, Industry, Banner, WhatWeDo
+                     Inquiry, DownloadableFile, NewsPost, Testimonial, Industry, Banner, OurWork
                      )
 
 
@@ -257,8 +257,8 @@ class BannerSerializer(BaseLocaleSerializer):
         read_only_fields = ('id', 'created_time', 'updated_time', 'created_by', 'updated_by')
 
 
-class WhatWeDoSerializer(BaseLocaleSerializer):
+class OurWorkSerializer(BaseLocaleSerializer):
     class Meta:
-        model = WhatWeDo
+        model = OurWork
         fields = '__all__'
         read_only_fields = ('id', 'created_time', 'updated_time', 'created_by', 'updated_by')

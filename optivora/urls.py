@@ -22,7 +22,7 @@ from optivora.views.project_image import ProjectImageView, ProjectImageDetailVie
 from optivora.views.service import ServiceView, ServiceDetailView, ServiceFieldInfoView, ServiceViewList
 from optivora.views.stat_item import StatItemView, StatItemDetailView, StatItemFieldInfoView
 from optivora.views.testimonial import TestimonialView, TestimonialDetailView, TestimonialFieldInfoView
-from optivora.views.what_we_do import WhatWeDoView, WhatWeDoDetailView, WhatWeDoFieldInfoView, WhatWeDoViewList
+from optivora.views.what_we_do import OurWorkView, OurWorkDetailView, OurWorkFieldInfoView, OurWorkViewList
 
 urlpatterns = [
     re_path(r'^company-profile$', CompanyProfileView.as_view(), name='company-profile-view'),
@@ -112,8 +112,8 @@ urlpatterns = [
 
     path('dashboard/stats/', dashboard_stats, name='dashboard-stats'),
 
-    re_path(r'^what-we-do$', WhatWeDoView.as_view(), name='what-we-do-list'),
-    path('what-we-do/<int:pk>', WhatWeDoDetailView.as_view(), name='what-we-do-detail'),
-    path('what-we-do/fields/', WhatWeDoFieldInfoView.as_view(), name='what-we-do-fields'),
-    path('what-we-do/public', WhatWeDoViewList.as_view(), name='what-we-do-public-info'),
+    re_path(r'^our-work$', OurWorkView.as_view(), name='our-work-list'),
+    path('our-work/<int:pk>', OurWorkDetailView.as_view(), name='our-work-detail'),
+    path('our-work/fields/', OurWorkFieldInfoView.as_view(), name='our-work-fields'),
+    path('our-work/public', OurWorkViewList.as_view(), name='our-work-public-info'),
 ]

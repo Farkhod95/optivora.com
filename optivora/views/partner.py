@@ -9,7 +9,7 @@ from rest_framework.permissions import AllowAny
 
 from optivora.filterset import PartnerFilter
 from optivora.models import Partner
-from optivora.serializers import PartnerSerializer
+from optivora.serializers import PartnerSerializer, PartnerListPublicSerializer
 
 from restapp.pagination import ResultsSetPagination
 from restapp.utils.responses import nonContent
@@ -33,7 +33,7 @@ class PartnerFieldInfoView(APIView):
 
 
 class PartnerViewList(ListCreateAPIView):
-    serializer_class = PartnerSerializer
+    serializer_class = PartnerListPublicSerializer
     pagination_class = ResultsSetPagination
     filter_backends = (filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend)
     filterset_class = PartnerFilter

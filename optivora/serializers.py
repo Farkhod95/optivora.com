@@ -150,7 +150,7 @@ class PartnerListPublicSerializer(BaseLocaleSerializer):
 
     class Meta:
         model = Partner
-        fields =( 'name', 'category', 'website', 'country', 'country_detail')
+        fields =( 'name', 'category', 'website', 'country', 'country_detail', 'logo', 'description', 'order_index')
 
 
 class ProjectSerializer(BaseLocaleSerializer):

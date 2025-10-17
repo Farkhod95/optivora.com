@@ -138,6 +138,7 @@ class PartnerSerializer(BaseLocaleSerializer):
     equipment_categories = serializers.PrimaryKeyRelatedField(
         queryset=EquipmentCategory.objects.all(), many=True, required=False
     )
+    country_detail = CountryListSerializer(source="country", read_only=True)
 
     class Meta:
         model = Partner

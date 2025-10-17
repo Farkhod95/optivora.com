@@ -91,11 +91,26 @@ class Service(BaseModel):
 class Partner(BaseModel):
     """Hamkor/Manufacturerlar: bo‘limlar bo‘yicha guruhlanadi (logo grid)."""
     class CATEGORY(models.TextChoices):
-        POWER_CONTROL = 'power_control', _('Power & Control Systems')
-        ROTATING = 'rotating', _('Rotating Equipment & Pumps')
-        SPECIALIZED = 'specialized', _('Specialized Systems')
-        SAFETY_MONITORING = 'safety_monitoring', _('Safety & Monitoring')
-        ELECTRICAL_POWER = 'electrical_power', _('Electrical & Power Components')
+        POWER_ELECTRONICS = 'power_electronics', _('Power Electronics')
+        AUTOMATION = 'automation', _('Automation')
+        DRIVES_MOTION = 'drives_motion', _('Drives & Motion')
+
+        INDUSTRIAL_PUMPS = 'industrial_pumps', _('Industrial Pumps')
+        HIGH_PERFORMANCE_PUMPS = 'high_performance_pumps', _('High-Performance Pumps')
+        PUMPS_VALVES = 'pumps_valves', _('Pumps & Valves')
+
+        SEALING_SOLUTIONS = 'sealing_solutions', _('Sealing Solutions')
+        COMPRESSION_SYSTEMS = 'compression_systems', _('Compression Systems')
+
+        FIRE_SAFETY = 'fire_safety', _('Fire Safety')
+        CONTROL_VALVES = 'control_valves', _('Control Valves')
+
+        POWER_EQUIPMENT = 'power_equipment', _('Power Equipment')
+        # POWER_CONTROL = 'power_control', _('Power & Control Systems')
+        # ROTATING = 'rotating', _('Rotating Equipment & Pumps')
+        # SPECIALIZED = 'specialized', _('Specialized Systems')
+        # SAFETY_MONITORING = 'safety_monitoring', _('Safety & Monitoring')
+        # ELECTRICAL_POWER = 'electrical_power', _('Electrical & Power Components')
 
     name = models.CharField(_('Nomi'), max_length=160, null=True, blank=True, unique=True, help_text=_('Hamkor/manufacturer nomi'))  # Masalan: Statron
     country = models.ForeignKey(Country, null=True, blank=True, on_delete=models.CASCADE, related_name='partner_country',

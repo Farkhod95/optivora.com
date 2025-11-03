@@ -164,8 +164,8 @@ class NewsPostAdmin(admin.ModelAdmin):
     fields = (
         'title', 'title_en', 'title_uz', 'title_ru', 'title_lt',
         'slug', 'category',
-        'excerpt', 'excerpt_en', 'excerpt_uz', 'excerpt_ru',
-        'body', 'body_en', 'body_uz', 'body_ru',
+        'excerpt', 'excerpt_en', 'excerpt_uz', 'excerpt_ru', 'excerpt_lt',
+        'body', 'body_en', 'body_uz', 'body_ru', 'body_lt',
         'cover_image', 'status', 'published_at',
     )
     search_fields = ('title', 'slug', 'excerpt', 'body')
@@ -175,9 +175,9 @@ class NewsPostAdmin(admin.ModelAdmin):
 class TestimonialAdmin(admin.ModelAdmin):
     list_display = ('author_name', 'company', 'is_featured')
     fields = (
-        'author_name', 'author_role', 'author_role_en', 'author_role_uz', 'author_role_ru',
+        'author_name', 'author_role', 'author_role_en', 'author_role_uz', 'author_role_ru', 'author_role_lt',
         'company',
-        'quote', 'quote_en', 'quote_uz', 'quote_ru',
+        'quote', 'quote_en', 'quote_uz', 'quote_ru', 'quote_lt',
         'photo', 'is_featured',
     )
     search_fields = ('author_name', 'author_role', 'company', 'quote')
@@ -188,7 +188,7 @@ class BannerAdmin(admin.ModelAdmin):
     list_display = ('title', 'description', 'photo', 'is_featured')
     fields = (
         'order_index', 'title', 'title_en', 'title_uz', 'title_ru', 'title_lt', 'description', 'description_en', 'description_uz',
-        'description_ru', 'photo', 'is_featured',
+        'description_ru', 'description_lt', 'photo', 'is_featured',
     )
     search_fields = ('title', 'description')
 
@@ -199,6 +199,6 @@ class OurWorkAdmin(admin.ModelAdmin):
     list_display = ('title', 'type', 'description', 'order_index')
     fields = (
         'order_index', 'title', 'title_en', 'title_uz', 'title_ru', 'title_lt', 'description', 'description_en', 'description_uz',
-        'description_ru', 'icon', 'type',
+        'description_ru', 'description_lt', 'icon', 'type',
     )
     search_fields = ('title', 'description')

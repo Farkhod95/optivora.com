@@ -91,7 +91,7 @@ class CompanyProfileListSerializer(LocaleSerializer):
 class IndustrySerializer(LocaleSerializer):
     class Meta:
         model = Industry
-        fields = ('id', 'name', 'name_en', 'name_uz', 'name_ru', 'name_lt', 'slug', 'description', 'icon',
+        fields = ('id', 'name', 'name_en', 'name_uz', 'name_ru', 'name_lt', 'slug', 'description', 'description_en', 'description_uz', 'description_ru', 'description_lt', 'icon',
                   'order_index')
         extra_kwargs = {
             'name_en': {"required": True},
@@ -104,7 +104,7 @@ class IndustrySerializer(LocaleSerializer):
 class IndustryListPublicSerializer(LocaleSerializer):
     class Meta:
         model = Industry
-        fields = ('id', 'name', 'name_en', 'name_uz', 'name_ru', 'name_lt', 'slug', 'description', 'icon',
+        fields = ('id', 'name', 'name_en', 'name_uz', 'name_ru', 'name_lt', 'slug', 'description', 'description_en', 'description_uz', 'description_ru', 'description_lt', 'icon',
                   'order_index')
 
 
@@ -156,7 +156,7 @@ class PartnerListPublicSerializer(BaseLocaleSerializer):
 
     class Meta:
         model = Partner
-        fields =( 'name', 'category', 'website', 'country', 'country_detail', 'logo', 'description', 'order_index')
+        fields =( 'name', 'category', 'website', 'country', 'country_detail', 'logo', 'description', 'description_en', 'description_uz', 'description_ru', 'description_lt', 'order_index')
 
 
 class ProjectSerializer(BaseLocaleSerializer):

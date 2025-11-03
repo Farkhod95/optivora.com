@@ -52,7 +52,7 @@ class ProjectView(ListCreateAPIView):
     filter_backends = (filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend)
     filterset_class = ProjectFilter
     search_fields = (
-        'title', 'title_en', 'title_uz', 'title_ru',
+        'title', 'title_en', 'title_uz', 'title_ru', 'title_lt',
         'summary', 'summary_en', 'summary_uz', 'summary_ru',
         'scope', 'scope_en', 'scope_uz', 'scope_ru',
         'location_city', 'location_city_en', 'location_city_uz', 'location_city_ru',

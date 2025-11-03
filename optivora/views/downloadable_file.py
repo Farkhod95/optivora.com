@@ -52,8 +52,8 @@ class DownloadableFileView(ListCreateAPIView):
     filter_backends = (filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend)
     filterset_class = DownloadableFileFilter
     search_fields = (
-        'title', 'title_en', 'title_uz', 'title_ru',
-        'description', 'description_en', 'description_uz', 'description_ru',
+        'title', 'title_en', 'title_uz', 'title_ru', 'title_lt',
+        'description', 'description_en', 'description_uz', 'description_ru', 'description_lt',
     )
     ordering = ['pk']
 

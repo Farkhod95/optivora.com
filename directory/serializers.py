@@ -8,18 +8,19 @@ class LocaleSerializer(serializers.ModelSerializer):
     name_en = serializers.CharField(allow_blank=False)
     name_uz = serializers.CharField(allow_blank=False)
     name_ru = serializers.CharField(allow_blank=False)
+    name_lt = serializers.CharField(allow_blank=False)
 
 
 class CountrySerializer(LocaleSerializer):
     class Meta:
         model = Country
-        fields = ('id', 'code', 'name', 'name_en', 'name_uz', 'name_ru')
+        fields = ('id', 'code', 'name', 'name_en', 'name_uz', 'name_ru', 'name_lt')
         extra_kwargs = {
             'code': {"required": True},
             'name_en': {"required": True},
             'name_uz': {"required": True},
             'name_ru': {"required": True},
-            'name_kaa': {"required": True},
+            'name_lt': {"required": True},
         }
 
 
@@ -50,7 +51,7 @@ class RelatedPositionSerializer(serializers.ModelSerializer):
 class RegionSerializer(LocaleSerializer):
     class Meta:
         model = Region
-        fields = ('id', 'code', 'name', 'name_en', 'name_uz', 'name_ru')
+        fields = ('id', 'code', 'name', 'name_en', 'name_uz', 'name_ru', 'name_lt')
         extra_kwargs = {
             'code': {"required": True},
             'name_en': {"required": True},
@@ -62,7 +63,7 @@ class RegionSerializer(LocaleSerializer):
 class RegionListSerializer(LocaleSerializer):
     class Meta:
         model = Region
-        fields = ('id', 'code', 'name', 'name_en', 'name_uz', 'name_ru')
+        fields = ('id', 'code', 'name', 'name_en', 'name_uz', 'name_ru', 'name_lt')
 
 
 class RegionListPublicSerializer(LocaleSerializer):
@@ -88,13 +89,13 @@ class DistrictListSerializer(LocaleSerializer):
 
     class Meta:
         model = District
-        fields = ('id', 'code', 'name', 'name_en', 'name_uz', 'name_ru', 'region', 'region_detail')
+        fields = ('id', 'code', 'name', 'name_en', 'name_uz', 'name_ru', 'name_lt', 'region', 'region_detail')
 
 
 class DistrictSerializer(LocaleSerializer):
     class Meta:
         model = District
-        fields = ('id', 'code', 'name', 'name_en', 'name_uz', 'name_ru', 'region')
+        fields = ('id', 'code', 'name', 'name_en', 'name_uz', 'name_ru', 'name_lt', 'region')
         extra_kwargs = {
             'code': {"required": True},
             'region': {"required": True},

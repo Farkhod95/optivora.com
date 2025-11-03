@@ -52,7 +52,7 @@ class EquipmentCategoryView(ListCreateAPIView):
     filter_backends = (filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend)
     filterset_class = EquipmentCategoryFilter
     search_fields = (
-        'name', 'name_en', 'name_uz', 'name_ru',
+        'name', 'name_en', 'name_uz', 'name_ru', 'name_lt',
         'description', 'description_en', 'description_uz', 'description_ru',
         'slug',
     )

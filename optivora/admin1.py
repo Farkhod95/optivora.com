@@ -21,35 +21,35 @@ from .models import (
 @admin.register(CompanyProfile)
 class CompanyProfileAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'phone')
-    fields = ('name', 'name_en', 'name_uz', 'name_ru', 'logo', 'email', 'phone', 'address', 'business_hours', 'title', 'title_en', 'title_uz', 'titleru', 'description', 'description_en', 'description_uz', 'description_ru',)
+    fields = ('name', 'name_en', 'name_uz', 'name_ru', 'name_lt', 'logo', 'email', 'phone', 'address', 'business_hours', 'title', 'title_en', 'title_uz', 'titleru', 'description', 'description_en', 'description_uz', 'description_ru', 'description_lt',)
     search_fields = ('name', 'email', 'phone', 'address')
 
 
 @admin.register(Industry)
 class IndustryAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug', 'order_index')
-    fields = ('name', 'name_en', 'name_uz', 'name_ru', 'slug', 'short_description', 'description', 'icon', 'order_index', )
+    fields = ('name', 'name_en', 'name_uz', 'name_ru', 'name_lt', 'slug', 'short_description', 'description', 'icon', 'order_index', )
     search_fields = ('name', 'slug', 'short_description', 'description')
 
 
 @admin.register(EquipmentCategory)
 class EquipmentCategoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug', 'order_index')
-    fields = ('name', 'name_en', 'name_uz', 'name_ru', 'slug', 'description', 'order_index', )
+    fields = ('name', 'name_en', 'name_uz', 'name_ru', 'name_lt', 'slug', 'description', 'order_index', )
     search_fields = ('name', 'slug', 'description')
 
 
 @admin.register(Service)
 class ServiceAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug', 'order_index')
-    fields = ('name', 'name_en', 'name_uz', 'name_ru', 'slug', 'short_description', 'description', 'icon', 'industries', 'equipment_categories', 'order_index', )
+    fields = ('name', 'name_en', 'name_uz', 'name_ru', 'name_lt', 'slug', 'short_description', 'description', 'icon', 'industries', 'equipment_categories', 'order_index', )
     search_fields = ('name', 'slug', 'short_description', 'description')
 
 
 @admin.register(Partner)
 class PartnerAdmin(admin.ModelAdmin):
     list_display = ('name', 'category', 'website', 'order_index')
-    fields = ('name', 'name_en', 'name_uz', 'name_ru', 'category', 'logo', 'website', 'description', 'industries', 'equipment_categories', 'order_index', )
+    fields = ('name', 'name_en', 'name_uz', 'name_ru', 'name_lt', 'category', 'logo', 'website', 'description', 'industries', 'equipment_categories', 'order_index', )
     search_fields = ('name', 'website', 'description')
 
 
@@ -57,7 +57,7 @@ class PartnerAdmin(admin.ModelAdmin):
 class ProjectAdmin(admin.ModelAdmin):
     list_display = ('title', 'year', 'country', 'region', 'district', 'is_featured', 'order_index')
     fields = (
-        'title', 'title_en', 'title_uz', 'title_ru', 'slug', 'country', 'region', 'district', 'year', 'scope', 'summary',
+        'title', 'title_en', 'title_uz', 'title_ru', 'title_lt', 'slug', 'country', 'region', 'district', 'year', 'scope', 'summary',
         'featured_image', 'industries', 'equipment_categories', 'partners',
         'is_featured', 'order_index', 
     )
@@ -67,7 +67,7 @@ class ProjectAdmin(admin.ModelAdmin):
 @admin.register(ProjectDeliverable)
 class ProjectDeliverableAdmin(admin.ModelAdmin):
     list_display = ('project', 'name')
-    fields = ('project', 'name', 'name_en', 'name_uz', 'name_ru', )
+    fields = ('project', 'name', 'name_en', 'name_uz', 'name_ru', 'name_lt', )
     search_fields = ('name', 'project__title')
 
 

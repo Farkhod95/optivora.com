@@ -5,12 +5,13 @@ from .models import TranslationTerm, ModelAudit
 class TermSerializer(serializers.ModelSerializer):
     class Meta:
         model = TranslationTerm
-        fields = ('id', 'term_name', 'name_en', 'name_uz', 'name_ru')
+        fields = ('id', 'term_name', 'name_en', 'name_uz', 'name_ru', 'name_lt')
         extra_kwargs = {
             'term_name': {"required": True},
             'name_en': {"required": True},
             'name_uz': {"required": True},
             'name_ru': {"required": True},
+            'name_lt': {"required": True},
         }
 
 

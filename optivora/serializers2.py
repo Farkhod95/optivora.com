@@ -64,8 +64,8 @@ class CompanyProfileSerializer(LocaleSerializer):
     class Meta:
         model = CompanyProfile
         fields = (
-        'id', 'name', 'name_en', 'name_uz', 'name_ru', 'logo', 'email', 'phone', 'address', 'business_hours', 'title',
-        'title_en', 'title_uz', 'titleru', 'description', 'description_en', 'description_uz', 'description_ru')
+        'id', 'name', 'name_en', 'name_uz', 'name_ru', 'name_lt', 'logo', 'email', 'phone', 'address', 'business_hours', 'title',
+        'title_en', 'title_uz', 'titleru', 'description', 'description_en', 'description_uz', 'description_ru', 'description_lt')
         extra_kwargs = {
             'name': {"required": True},
             'name_en': {"required": True},
@@ -78,14 +78,14 @@ class CompanyProfileListSerializer(LocaleSerializer):
     class Meta:
         model = CompanyProfile
         fields = (
-        'id', 'name', 'name_en', 'name_uz', 'name_ru', 'logo', 'email', 'phone', 'address', 'business_hours', 'title',
-        'title_en', 'title_uz', 'titleru', 'description', 'description_en', 'description_uz', 'description_ru')
+        'id', 'name', 'name_en', 'name_uz', 'name_ru', 'name_lt', 'logo', 'email', 'phone', 'address', 'business_hours', 'title',
+        'title_en', 'title_uz', 'titleru', 'description', 'description_en', 'description_uz', 'description_ru', 'description_lt')
 
 
 class IndustrySerializer(LocaleSerializer):
     class Meta:
         model = Industry
-        fields = ('id', 'name', 'name_en', 'name_uz', 'name_ru', 'slug', 'short_description', 'description', 'icon',
+        fields = ('id', 'name', 'name_en', 'name_uz', 'name_ru', 'name_lt', 'slug', 'short_description', 'description', 'icon',
                   'order_index')
         extra_kwargs = {
             'name': {"required": True},
@@ -98,7 +98,7 @@ class IndustrySerializer(LocaleSerializer):
 class IndustryListSerializer(LocaleSerializer):
     class Meta:
         model = Industry
-        fields = ('id', 'name', 'name_en', 'name_uz', 'name_ru', 'slug', 'short_description', 'description', 'icon',
+        fields = ('id', 'name', 'name_en', 'name_uz', 'name_ru', 'name_lt', 'slug', 'short_description', 'description', 'icon',
                   'order_index')
 
 

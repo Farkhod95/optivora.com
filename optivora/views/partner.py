@@ -52,8 +52,8 @@ class PartnerView(ListCreateAPIView):
     filter_backends = (filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend)
     filterset_class = PartnerFilter
     search_fields = (
-        'name', 'name_en', 'name_uz', 'name_ru',
-        'description', 'description_en', 'description_uz', 'description_ru',
+        'name', 'name_en', 'name_uz', 'name_ru', 'name_lt',
+        'description', 'description_en', 'description_uz', 'description_ru', 'description_lt',
         'website',
     )
     ordering = ['order_index']

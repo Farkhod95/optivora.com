@@ -12,18 +12,22 @@ class LocaleSerializer(serializers.ModelSerializer):
     name_en = serializers.CharField(allow_blank=False)
     name_uz = serializers.CharField(allow_blank=False)
     name_ru = serializers.CharField(allow_blank=False)
+    name_lt = serializers.CharField(allow_blank=False)
 
     title_en = serializers.CharField(allow_blank=False)
     title_uz = serializers.CharField(allow_blank=False)
     title_ru = serializers.CharField(allow_blank=False)
+    title_lt = serializers.CharField(allow_blank=False)
 
     label_en = serializers.CharField(allow_blank=False)
     label_uz = serializers.CharField(allow_blank=False)
     label_ru = serializers.CharField(allow_blank=False)
+    label_lt = serializers.CharField(allow_blank=False)
 
     description_en = serializers.CharField(allow_blank=False)
     description_uz = serializers.CharField(allow_blank=False)
     description_ru = serializers.CharField(allow_blank=False)
+    description_lt = serializers.CharField(allow_blank=False)
 
 
 class BaseLocaleSerializer(serializers.ModelSerializer):
@@ -37,7 +41,7 @@ class BaseLocaleSerializer(serializers.ModelSerializer):
         'summary', 'caption', 'excerpt', 'body', 'scope',
         'question', 'answer', 'quote', 'author_role', 'company',
     ]
-    LANGS = ['en', 'uz', 'ru']
+    LANGS = ['en', 'uz', 'ru', 'lt']
     REQUIRED_BASES = {'name', 'title', 'label', 'question', 'answer'}  # muhim maydonlar
 
     def get_fields(self):
@@ -64,13 +68,14 @@ class CompanyProfileSerializer(LocaleSerializer):
     class Meta:
         model = CompanyProfile
         fields = (
-        'id', 'name', 'name_en', 'name_uz', 'name_ru', 'logo', 'email', 'phone', 'address', 'business_hours', 'title',
-        'title_en', 'title_uz', 'title_ru', 'description', 'description_en', 'description_uz', 'description_ru', 'file',
+        'id', 'name', 'name_en', 'name_uz', 'name_ru', 'name_lt', 'logo', 'email', 'phone', 'address', 'business_hours', 'title',
+        'title_en', 'title_uz', 'title_ru', 'title_lt', 'description', 'description_en', 'description_uz', 'description_ru', 'description_lt', 'file',
         'years_experience', 'equipment_categories', 'projects_supported', 'international_partners',)
         extra_kwargs = {
             'name_en': {"required": True},
             'name_uz': {"required": True},
             'name_ru': {"required": True},
+            'name_lt': {"required": True},
         }
 
 
@@ -78,27 +83,28 @@ class CompanyProfileListSerializer(LocaleSerializer):
     class Meta:
         model = CompanyProfile
         fields = (
-        'id', 'name', 'name_en', 'name_uz', 'name_ru', 'logo', 'email', 'phone', 'address', 'business_hours', 'title',
-        'title_en', 'title_uz', 'titleru', 'description', 'description_en', 'description_uz', 'description_ru', 'file',
+        'id', 'name', 'name_en', 'name_uz', 'name_ru', 'name_lt', 'logo', 'email', 'phone', 'address', 'business_hours', 'title',
+        'title_en', 'title_uz', 'titleru', 'description', 'description_en', 'description_uz', 'description_ru', 'description_lt', 'file',
         'years_experience', 'equipment_categories', 'projects_supported', 'international_partners',)
 
 
 class IndustrySerializer(LocaleSerializer):
     class Meta:
         model = Industry
-        fields = ('id', 'name', 'name_en', 'name_uz', 'name_ru', 'slug', 'description', 'icon',
+        fields = ('id', 'name', 'name_en', 'name_uz', 'name_ru', 'name_lt', 'slug', 'description', 'icon',
                   'order_index')
         extra_kwargs = {
             'name_en': {"required": True},
             'name_uz': {"required": True},
             'name_ru': {"required": True},
+            'name_lt': {"required": True},
         }
 
 
 class IndustryListPublicSerializer(LocaleSerializer):
     class Meta:
         model = Industry
-        fields = ('id', 'name', 'name_en', 'name_uz', 'name_ru', 'slug', 'description', 'icon',
+        fields = ('id', 'name', 'name_en', 'name_uz', 'name_ru', 'name_lt', 'slug', 'description', 'icon',
                   'order_index')
 
 

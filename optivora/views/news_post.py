@@ -52,7 +52,7 @@ class NewsPostView(ListCreateAPIView):
     filter_backends = (filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend)
     filterset_class = NewsPostFilter
     search_fields = (
-        'title', 'title_en', 'title_uz', 'title_ru',
+        'title', 'title_en', 'title_uz', 'title_ru', 'title_lt',
         'excerpt', 'excerpt_en', 'excerpt_uz', 'excerpt_ru',
         'body', 'body_en', 'body_uz', 'body_ru',
         'slug',

@@ -52,9 +52,9 @@ class ServiceView(ListCreateAPIView):
     filter_backends = (filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend)
     filterset_class = ServiceFilter
     search_fields = (
-        'name', 'name_en', 'name_uz', 'name_ru',
+        'name', 'name_en', 'name_uz', 'name_ru', 'name_lt',
         'short_description', 'short_description_en', 'short_description_uz', 'short_description_ru',
-        'description', 'description_en', 'description_uz', 'description_ru',
+        'description', 'description_en', 'description_uz', 'description_ru', 'description_lt',
         'slug',
     )
     ordering = ['order_index']

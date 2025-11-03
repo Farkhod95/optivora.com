@@ -14,9 +14,9 @@ class BaseAdmin(admin.ModelAdmin):
 
 @admin.register(TranslationTerm)
 class UILanguageAdmin(BaseAdmin):
-    list_display = ('id', 'term_name', 'name_en', 'name_uz', 'name_ru')
-    fields = ('term_name', 'name_en', 'name_uz', 'name_ru')
-    search_fields = ('term_name', 'name_en', 'name_uz', 'name_ru')
+    list_display = ('id', 'term_name', 'name_en', 'name_uz', 'name_ru', 'name_lt')
+    fields = ('term_name', 'name_en', 'name_uz', 'name_ru', 'name_lt')
+    search_fields = ('term_name', 'name_en', 'name_uz', 'name_ru', 'name_lt')
 
 
 class ExtendedContentTypeInline(admin.TabularInline):

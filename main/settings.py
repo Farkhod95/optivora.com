@@ -179,6 +179,7 @@ LANGUAGES = (
     ('en', _('Ingliz')),
     ('uz', _('O‘zbek (Lotin)')),
     ('ru', _('Русский')),
+    ('lt', _('Литовский')),
 )
 
 # Internationalization
@@ -191,7 +192,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-LANGUAGE_CODE = 'uz'
+LANGUAGE_CODE = 'lt'
 
 # Static files (CSS, JavaScript, Images)
 

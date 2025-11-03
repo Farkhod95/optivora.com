@@ -22,10 +22,10 @@ from .models import (
 class CompanyProfileAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'phone')
     fields = (
-        'name', 'name_en', 'name_uz', 'name_ru', 'file', 'years_experience', 'equipment_categories', 'projects_supported',
+        'name', 'name_en', 'name_uz', 'name_ru', 'name_lt', 'file', 'years_experience', 'equipment_categories', 'projects_supported',
         'international_partners', 'logo', 'email', 'phone', 'address', 'business_hours',
-        'title', 'title_en', 'title_uz', 'title_ru',
-        'description', 'description_en', 'description_uz', 'description_ru',
+        'title', 'title_en', 'title_uz', 'title_ru', 'title_lt',
+        'description', 'description_en', 'description_uz', 'description_ru', 'description_lt',
     )
     search_fields = ('name', 'email', 'phone', 'address')
 
@@ -34,8 +34,8 @@ class CompanyProfileAdmin(admin.ModelAdmin):
 class IndustryAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug', 'order_index')
     fields = (
-        'name', 'name_en', 'name_uz', 'name_ru',
-        'slug', 'description', 'description_en', 'description_uz', 'description_ru',
+        'name', 'name_en', 'name_uz', 'name_ru', 'name_lt',
+        'slug', 'description', 'description_en', 'description_uz', 'description_ru', 'description_lt',
         'icon', 'order_index',
     )
     search_fields = ('name', 'slug', 'short_description', 'description')
@@ -45,9 +45,9 @@ class IndustryAdmin(admin.ModelAdmin):
 class EquipmentCategoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug', 'order_index')
     fields = (
-        'name', 'name_en', 'name_uz', 'name_ru',
+        'name', 'name_en', 'name_uz', 'name_ru', 'name_lt',
         'slug',
-        'description', 'description_en', 'description_uz', 'description_ru',
+        'description', 'description_en', 'description_uz', 'description_ru', 'description_lt',
         'order_index',
     )
     search_fields = ('name', 'slug', 'description')
@@ -57,8 +57,8 @@ class EquipmentCategoryAdmin(admin.ModelAdmin):
 class ServiceAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug', 'order_index')
     fields = (
-        'name', 'name_en', 'name_uz', 'name_ru',
-        'slug', 'description', 'description_en', 'description_uz', 'description_ru',
+        'name', 'name_en', 'name_uz', 'name_ru', 'name_lt',
+        'slug', 'description', 'description_en', 'description_uz', 'description_ru', 'description_lt',
         'icon', 'industries', 'equipment_categories', 'order_index',
     )
     search_fields = ('name', 'slug', 'short_description', 'description')
@@ -68,9 +68,9 @@ class ServiceAdmin(admin.ModelAdmin):
 class PartnerAdmin(admin.ModelAdmin):
     list_display = ('name', 'category', 'website', 'order_index')
     fields = (
-        'name', 'name_en', 'name_uz', 'name_ru', 'country',
+        'name', 'name_en', 'name_uz', 'name_ru', 'name_lt', 'country',
         'category', 'logo', 'website',
-        'description', 'description_en', 'description_uz', 'description_ru',
+        'description', 'description_en', 'description_uz', 'description_ru', 'description_lt',
         'industries', 'equipment_categories', 'order_index',
     )
     search_fields = ('name', 'website', 'description')
@@ -81,7 +81,7 @@ class PartnerAdmin(admin.ModelAdmin):
 class ProjectAdmin(admin.ModelAdmin):
     list_display = ('title', 'year', 'country', 'region', 'district', 'is_featured', 'order_index')
     fields = (
-        'title', 'title_en', 'title_uz', 'title_ru',
+        'title', 'title_en', 'title_uz', 'title_ru', 'title_lt',
         'slug', 'country', 'region', 'district', 'year',
         'scope', 'scope_en', 'scope_uz', 'scope_ru',
         'summary', 'summary_en', 'summary_uz', 'summary_ru',
@@ -96,7 +96,7 @@ class ProjectDeliverableAdmin(admin.ModelAdmin):
     list_display = ('project', 'name')
     fields = (
         'project',
-        'name', 'name_en', 'name_uz', 'name_ru',
+        'name', 'name_en', 'name_uz', 'name_ru', 'name_lt',
     )
     search_fields = ('name', 'project__title')
 
@@ -150,9 +150,9 @@ class InquiryAdmin(admin.ModelAdmin):
 class DownloadableFileAdmin(admin.ModelAdmin):
     list_display = ('title', 'category', 'is_public')
     fields = (
-        'title', 'title_en', 'title_uz', 'title_ru',
+        'title', 'title_en', 'title_uz', 'title_ru', 'title_lt',
         'category',
-        'description', 'description_en', 'description_uz', 'description_ru',
+        'description', 'description_en', 'description_uz', 'description_ru', 'description_lt',
         'file', 'is_public',
     )
     search_fields = ('title', 'description')
@@ -162,7 +162,7 @@ class DownloadableFileAdmin(admin.ModelAdmin):
 class NewsPostAdmin(admin.ModelAdmin):
     list_display = ('title', 'category', 'status', 'published_at')
     fields = (
-        'title', 'title_en', 'title_uz', 'title_ru',
+        'title', 'title_en', 'title_uz', 'title_ru', 'title_lt',
         'slug', 'category',
         'excerpt', 'excerpt_en', 'excerpt_uz', 'excerpt_ru',
         'body', 'body_en', 'body_uz', 'body_ru',
@@ -187,7 +187,7 @@ class TestimonialAdmin(admin.ModelAdmin):
 class BannerAdmin(admin.ModelAdmin):
     list_display = ('title', 'description', 'photo', 'is_featured')
     fields = (
-        'order_index', 'title', 'title_en', 'title_uz', 'title_ru', 'description', 'description_en', 'description_uz',
+        'order_index', 'title', 'title_en', 'title_uz', 'title_ru', 'title_lt', 'description', 'description_en', 'description_uz',
         'description_ru', 'photo', 'is_featured',
     )
     search_fields = ('title', 'description')
@@ -198,7 +198,7 @@ class BannerAdmin(admin.ModelAdmin):
 class OurWorkAdmin(admin.ModelAdmin):
     list_display = ('title', 'type', 'description', 'order_index')
     fields = (
-        'order_index', 'title', 'title_en', 'title_uz', 'title_ru', 'description', 'description_en', 'description_uz',
+        'order_index', 'title', 'title_en', 'title_uz', 'title_ru', 'title_lt', 'description', 'description_en', 'description_uz',
         'description_ru', 'icon', 'type',
     )
     search_fields = ('title', 'description')

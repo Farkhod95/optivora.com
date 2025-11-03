@@ -116,7 +116,7 @@ class ProjectImageAdmin(admin.ModelAdmin):
 class StatItemAdmin(admin.ModelAdmin):
     list_display = ('label', 'value', 'order_index')
     fields = (
-        'label', 'label_en', 'label_uz', 'label_ru',
+        'label', 'label_en', 'label_uz', 'label_ru', 'label_lt',
         'value', 'order_index',
     )
     search_fields = ('label', 'value')
@@ -126,8 +126,8 @@ class StatItemAdmin(admin.ModelAdmin):
 class FAQAdmin(admin.ModelAdmin):
     list_display = ('question', 'order_index')
     fields = (
-        'question', 'question_en', 'question_uz', 'question_ru',
-        'answer', 'answer_en', 'answer_uz', 'answer_ru',
+        'question', 'question_en', 'question_uz', 'question_ru', 'question_lt',
+        'answer', 'answer_en', 'answer_uz', 'answer_ru', 'answer_lt',
         'order_index',
     )
     search_fields = ('question', 'answer')
